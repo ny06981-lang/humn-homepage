@@ -530,40 +530,115 @@
       to { transform: translate3d(-50%, 0, 0); }
     }
 
-    .archive-map {
+    .archive-intro {
       display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 22px;
-      align-items: stretch;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 44px;
+      align-items: end;
+      margin-bottom: 34px;
     }
-    .archive-photo {
-      min-height: 620px;
-      border-radius: 8px;
+    .case-carousel {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
       background:
-        linear-gradient(0deg, rgba(18,18,18,.26), rgba(18,18,18,.03)),
-        url("https://static.tildacdn.com/tild3766-3565-4631-a334-333462353835/havuz-bolgesi.jpg");
-      background-size: cover;
-      background-position: center;
+        linear-gradient(90deg, rgba(165,162,255,.28), rgba(255,173,78,.22) 38%, rgba(108,235,225,.22)),
+        var(--paper);
     }
-    .archive-list {
-      display: grid;
-      border-top: 1px solid var(--line);
+    .case-carousel::before,
+    .case-carousel::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      z-index: 2;
+      width: 96px;
+      height: 100%;
+      pointer-events: none;
     }
-    .archive-row {
-      display: grid;
-      grid-template-columns: 230px 1fr;
+    .case-carousel::before {
+      left: 0;
+      background: linear-gradient(90deg, var(--paper), rgba(255,253,248,0));
+    }
+    .case-carousel::after {
+      right: 0;
+      background: linear-gradient(270deg, var(--paper), rgba(255,253,248,0));
+    }
+    .case-track {
+      display: flex;
+      width: max-content;
+      animation: caseFlow 58s linear infinite;
+    }
+    .case-carousel:hover .case-track { animation-play-state: paused; }
+    .case-set {
+      display: flex;
+      gap: 14px;
+      padding: 18px 7px;
+    }
+    .case-card {
+      flex: 0 0 372px;
+      min-height: 318px;
+      padding: 18px;
+      border: 1px solid rgba(50,50,50,.18);
+      border-radius: 8px;
+      background: rgba(255,253,248,.86);
+      box-shadow: 0 18px 46px rgba(50,50,50,.1);
+      display: flex;
+      flex-direction: column;
       gap: 18px;
-      align-items: center;
-      min-height: 140px;
-      padding: 18px 0;
-      border-bottom: 1px solid var(--line);
     }
-    .archive-row b {
+    .case-card:nth-child(2n) { transform: translateY(14px); }
+    .case-card:nth-child(3n) { background: rgba(240,238,255,.9); }
+    .case-card:nth-child(4n) { background: rgba(231,255,252,.88); }
+    .case-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      min-height: 76px;
+    }
+    .case-top b {
       font-family: var(--heading);
       font-size: 28px;
       line-height: 1.42;
     }
-    .archive-row p { margin: 0; font-size: 15px; }
+    .case-number {
+      font-family: var(--heading);
+      font-size: 46px;
+      line-height: 1;
+      color: rgba(81,39,64,.28);
+    }
+    .case-fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px;
+      border: 1px solid var(--line);
+      background: var(--line);
+    }
+    .case-field {
+      min-height: 70px;
+      padding: 11px;
+      background: rgba(255,253,248,.7);
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      justify-content: flex-start;
+    }
+    .case-field span:first-child {
+      font-size: 11px;
+      line-height: 1.2;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: rgba(50,50,50,.54);
+    }
+    .case-field span:last-child {
+      font-size: 14px;
+      line-height: 1.3;
+    }
+    .case-card p { margin: 0; font-size: 16px; }
+    @keyframes caseFlow {
+      from { transform: translate3d(-50%, 0, 0); }
+      to { transform: translate3d(0, 0, 0); }
+    }
 
     .resources {
       background: var(--clay);
@@ -631,7 +706,7 @@
       .split,
       .featured-program,
       .teachers-head,
-      .archive-map,
+      .archive-intro,
       .resource-grid {
         grid-template-columns: 1fr;
       }
@@ -646,7 +721,7 @@
       }
       .teacher { flex-basis: 304px; }
       .featured-visual { min-height: 420px; }
-      .archive-photo { min-height: 440px; }
+      .case-card { flex-basis: 344px; }
     }
 
     @media (max-width: 560px) {
@@ -682,7 +757,16 @@
         padding: 18px;
       }
       .teacher-avatar { width: 116px; height: 116px; }
-      .archive-row { grid-template-columns: 1fr; }
+      .case-carousel::before,
+      .case-carousel::after { width: 34px; }
+      .case-set { gap: 10px; padding: 14px 5px; }
+      .case-card {
+        flex-basis: 286px;
+        min-height: 370px;
+        padding: 15px;
+      }
+      .case-card:nth-child(2n) { transform: translateY(10px); }
+      .case-fields { grid-template-columns: 1fr; }
     }
     @media (prefers-reduced-motion: reduce) {
       .teacher-marquee {
@@ -693,6 +777,14 @@
       .teacher-marquee::after { display: none; }
       .teacher-track { animation: none; }
       .teacher-set[aria-hidden="true"] { display: none; }
+      .case-carousel {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .case-carousel::before,
+      .case-carousel::after { display: none; }
+      .case-track { animation: none; }
+      .case-set[aria-hidden="true"] { display: none; }
     }
   </style>
 </head>
@@ -844,17 +936,30 @@
     </section>
 
     <section id="archive" class="section">
-      <div class="container archive-map">
-        <div class="archive-photo" aria-label="Место ретрита"></div>
-        <div>
+      <div class="container">
+        <div class="archive-intro">
+          <div>
           <p class="eyebrow">выполненные проекты</p>
-          <h2>место + формат + ведущий</h2>
+          <h2>кейсы проведённых ретритов</h2>
+          </div>
           <p>Этот блок работает как доказательство опыта. Не просто “мы были в Турции”, а “мы собирали конкретные поля с конкретными ведущими”.</p>
-          <div class="archive-list">
-            <div class="archive-row"><b>Чиралы</b><p>Турция / тантрический кемп / Георгий Голобоков</p></div>
-            <div class="archive-row"><b>Осознанная тантра</b><p>Хома и Мукто / ретрит / Турция и Азия</p></div>
-            <div class="archive-row"><b>Путь силы</b><p>СамудроПрем / чакры / интенсивная трансформация</p></div>
-            <div class="archive-row"><b>Тбилиси</b><p>городские практики / Сева Прем / тонкая чувствительность</p></div>
+        </div>
+        <div class="case-carousel" aria-label="Шаблоны кейсов выполненных проектов">
+          <div class="case-track">
+            <div class="case-set">
+              <article class="case-card"><div class="case-top"><b>Название ретрита</b><span class="case-number">01</span></div><div class="case-fields"><div class="case-field"><span>ведущий</span><span>Имя мастера</span></div><div class="case-field"><span>страна</span><span>Страна</span></div><div class="case-field"><span>участники</span><span>кол-во человек</span></div><div class="case-field"><span>дата</span><span>месяц, год</span></div></div><p>Короткий текст о том, что происходило на ретрите и какой опыт получил участник.</p></article>
+              <article class="case-card"><div class="case-top"><b>Название ретрита</b><span class="case-number">02</span></div><div class="case-fields"><div class="case-field"><span>ведущий</span><span>Имя мастера</span></div><div class="case-field"><span>страна</span><span>Страна</span></div><div class="case-field"><span>участники</span><span>кол-во человек</span></div><div class="case-field"><span>дата</span><span>месяц, год</span></div></div><p>Один абзац: место, формат, глубина процесса и чем этот проект был важен для HUMN.</p></article>
+              <article class="case-card"><div class="case-top"><b>Название ретрита</b><span class="case-number">03</span></div><div class="case-fields"><div class="case-field"><span>ведущий</span><span>Имя мастера</span></div><div class="case-field"><span>страна</span><span>Страна</span></div><div class="case-field"><span>участники</span><span>кол-во человек</span></div><div class="case-field"><span>дата</span><span>месяц, год</span></div></div><p>Короткая история проекта: запрос группы, практика, место и видимый результат.</p></article>
+              <article class="case-card"><div class="case-top"><b>Название ретрита</b><span class="case-number">04</span></div><div class="case-fields"><div class="case-field"><span>ведущий</span><span>Имя мастера</span></div><div class="case-field"><span>страна</span><span>Страна</span></div><div class="case-field"><span>участники</span><span>кол-во человек</span></div><div class="case-field"><span>дата</span><span>месяц, год</span></div></div><p>Здесь будет короткий текст без воды: почему этот ретрит стоит показать как кейс.</p></article>
+              <article class="case-card"><div class="case-top"><b>Название ретрита</b><span class="case-number">05</span></div><div class="case-fields"><div class="case-field"><span>ведущий</span><span>Имя мастера</span></div><div class="case-field"><span>страна</span><span>Страна</span></div><div class="case-field"><span>участники</span><span>кол-во человек</span></div><div class="case-field"><span>дата</span><span>месяц, год</span></div></div><p>Мини-описание проекта на 1-2 строки, чтобы карточка читалась быстро в движении.</p></article>
+            </div>
+            <div class="case-set" aria-hidden="true">
+              <article class="case-card"><div class="case-top"><b>Название ретрита</b><span class="case-number">01</span></div><div class="case-fields"><div class="case-field"><span>ведущий</span><span>Имя мастера</span></div><div class="case-field"><span>страна</span><span>Страна</span></div><div class="case-field"><span>участники</span><span>кол-во человек</span></div><div class="case-field"><span>дата</span><span>месяц, год</span></div></div><p>Короткий текст о том, что происходило на ретрите и какой опыт получил участник.</p></article>
+              <article class="case-card"><div class="case-top"><b>Название ретрита</b><span class="case-number">02</span></div><div class="case-fields"><div class="case-field"><span>ведущий</span><span>Имя мастера</span></div><div class="case-field"><span>страна</span><span>Страна</span></div><div class="case-field"><span>участники</span><span>кол-во человек</span></div><div class="case-field"><span>дата</span><span>месяц, год</span></div></div><p>Один абзац: место, формат, глубина процесса и чем этот проект был важен для HUMN.</p></article>
+              <article class="case-card"><div class="case-top"><b>Название ретрита</b><span class="case-number">03</span></div><div class="case-fields"><div class="case-field"><span>ведущий</span><span>Имя мастера</span></div><div class="case-field"><span>страна</span><span>Страна</span></div><div class="case-field"><span>участники</span><span>кол-во человек</span></div><div class="case-field"><span>дата</span><span>месяц, год</span></div></div><p>Короткая история проекта: запрос группы, практика, место и видимый результат.</p></article>
+              <article class="case-card"><div class="case-top"><b>Название ретрита</b><span class="case-number">04</span></div><div class="case-fields"><div class="case-field"><span>ведущий</span><span>Имя мастера</span></div><div class="case-field"><span>страна</span><span>Страна</span></div><div class="case-field"><span>участники</span><span>кол-во человек</span></div><div class="case-field"><span>дата</span><span>месяц, год</span></div></div><p>Здесь будет короткий текст без воды: почему этот ретрит стоит показать как кейс.</p></article>
+              <article class="case-card"><div class="case-top"><b>Название ретрита</b><span class="case-number">05</span></div><div class="case-fields"><div class="case-field"><span>ведущий</span><span>Имя мастера</span></div><div class="case-field"><span>страна</span><span>Страна</span></div><div class="case-field"><span>участники</span><span>кол-во человек</span></div><div class="case-field"><span>дата</span><span>месяц, год</span></div></div><p>Мини-описание проекта на 1-2 строки, чтобы карточка читалась быстро в движении.</p></article>
+            </div>
           </div>
         </div>
       </div>
