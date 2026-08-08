@@ -326,13 +326,13 @@
       position: relative;
       min-height: 560px;
       background:
-        linear-gradient(180deg, rgba(18,18,18,.03), rgba(18,18,18,.54)),
-        url("https://static.tildacdn.com/tild6337-6334-4534-b363-646336316430/yoga-studyosu.jpg");
+        linear-gradient(180deg, rgba(18,18,18,.02), rgba(18,18,18,.5)),
+        url("https://static.tildacdn.com/tild6639-3033-4162-a264-623666343634/Homa_and_Mukto-1.jpg");
       background-size: cover;
-      background-position: center;
+      background-position: center top;
     }
     .featured-visual::after {
-      content: "open";
+      content: "bali";
       position: absolute;
       left: 22px;
       bottom: 18px;
@@ -346,8 +346,31 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      gap: 34px;
     }
     .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+    .program-facts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px;
+      margin-top: 26px;
+      border: 1px solid var(--line);
+      background: var(--line);
+    }
+    .program-fact {
+      min-height: 96px;
+      padding: 16px;
+      background: rgba(255, 253, 248, .72);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      justify-content: flex-start;
+    }
+    .program-fact b {
+      font-family: var(--heading);
+      font-size: 22px;
+      line-height: 1.22;
+    }
     .program-list {
       margin-top: 20px;
       display: grid;
@@ -583,6 +606,7 @@
       .quick-index a { border-right: 0; border-bottom: 1px solid var(--line); }
       .quick-index a:last-child { border-bottom: 0; }
       .featured-copy { padding: 24px; }
+      .program-facts { grid-template-columns: 1fr; }
       .program-mini { grid-template-columns: 1fr; }
       .teacher { min-height: 230px; }
       .archive-row { grid-template-columns: 1fr; }
@@ -645,17 +669,23 @@
           <div class="featured-copy">
             <div>
               <div class="tag-row">
-                <span class="pill">open program</span>
-                <span class="pill">тело</span>
-                <span class="pill">энергия</span>
-                <span class="pill">медитация</span>
+                <span class="pill">Бали / декабрь 2026</span>
+                <span class="pill">Хома и Мукто</span>
+                <span class="pill">тантра</span>
+                <span class="pill">2 части</span>
               </div>
-              <h2>Tantra Training. Освобождение сексуальной энергии</h2>
-              <p class="lead">Главный открытый вход на сайте: глубокая работа с телом, близостью, вниманием и внутренней свободой.</p>
-              <p>В Tilda сюда ставим точные даты, стоимость и ссылку на актуальную страницу. Если набора сейчас нет, блок меняется на “лист ожидания”, не ломая структуру главной.</p>
+              <h2>Тантра с Хомой и Муктой на Бали</h2>
+              <p class="lead">Ретрит для тех, кто хочет восстановить контакт с телом, сексуальностью и близостью в безопасном пространстве с международными тантра-терапевтами.</p>
+              <p>Программа проходит в Ramayana Candidasa Beach Resort у океана и состоит из двух частей: освобождение сексуальной энергии и близость через осознанность.</p>
+              <div class="program-facts" aria-label="Детали ретрита">
+                <div class="program-fact"><span class="micro">часть 1</span><b>3-12 декабря</b><span class="micro">освобождение сексуальной энергии, от 1200 EUR</span></div>
+                <div class="program-fact"><span class="micro">часть 2</span><b>15-20 декабря</b><span class="micro">близость и осознанность, от 720 EUR</span></div>
+                <div class="program-fact"><span class="micro">место</span><b>Бали, Индонезия</b><span class="micro">Ramayana Candidasa Beach Resort</span></div>
+                <div class="program-fact"><span class="micro">мастера</span><b>Хома и Мукто</b><span class="micro">30+ лет опыта, тренинги по всему миру</span></div>
+              </div>
             </div>
             <div class="btn-row">
-              <a class="btn" href="https://humns.ru/" target="_blank" rel="noreferrer">Открыть программу</a>
+              <a class="btn" href="https://humns.ru/tantra1_rus" target="_blank" rel="noreferrer">Открыть ретрит</a>
               <a class="btn light" href="https://t.me/chikhalov" target="_blank" rel="noreferrer">Задать вопрос</a>
             </div>
           </div>
