@@ -1,0 +1,766 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HUMN homepage main concept</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23fffdf8'/%3E%3Ccircle cx='32' cy='32' r='22' fill='%23a5a2ff'/%3E%3Ccircle cx='32' cy='32' r='12' fill='%23ffad4e'/%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --ink: #323232;
+      --night: #121212;
+      --paper: #fffdf8;
+      --milk: #f6f1ea;
+      --clay: #ebe3d8;
+      --violet: #a5a2ff;
+      --orange: #ffad4e;
+      --rose: #fa94b9;
+      --cyan: #6cebe1;
+      --plum: #512740;
+      --muted: rgba(50, 50, 50, .62);
+      --line: rgba(50, 50, 50, .16);
+      --heading: "Druk Wide Cyr", "Arial Black", Impact, sans-serif;
+      --body: "Involve", "TildaSans", Arial, sans-serif;
+      --ease: cubic-bezier(.16, 1, .3, 1);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--body);
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    button { font: inherit; }
+
+    .site-nav {
+      position: fixed;
+      z-index: 80;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1180px, calc(100vw - 28px));
+      min-height: 62px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 22px;
+      align-items: center;
+      padding: 10px 12px 10px 18px;
+      border: 1px solid rgba(50, 50, 50, .12);
+      border-radius: 8px;
+      background: rgba(255, 253, 248, .82);
+      backdrop-filter: blur(22px);
+      box-shadow: 0 18px 60px rgba(50, 50, 50, .08);
+    }
+    .site-logo { width: 128px; height: auto; }
+    .nav-links {
+      justify-self: center;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: rgba(50, 50, 50, .72);
+      font-size: 15px;
+    }
+    .nav-links a { transition: color .2s var(--ease); }
+    .nav-links a:hover { color: var(--ink); }
+
+    .container {
+      width: min(1180px, calc(100vw - 40px));
+      margin: 0 auto;
+    }
+    .section { padding: 108px 0; }
+    .section.tight { padding: 72px 0; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 32px;
+      height: 1px;
+      background: currentColor;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 {
+      font-family: var(--heading);
+      letter-spacing: 0;
+      font-weight: 900;
+      line-height: .92;
+      overflow-wrap: anywhere;
+    }
+    h1 {
+      max-width: 1100px;
+      font-size: 116px;
+      margin-bottom: 32px;
+    }
+    h2 {
+      max-width: 980px;
+      font-size: 78px;
+      margin-bottom: 28px;
+    }
+    h3 {
+      font-size: 34px;
+      line-height: .96;
+      margin-bottom: 16px;
+    }
+    p {
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.45;
+    }
+    .lead {
+      max-width: 780px;
+      color: var(--ink);
+      font-size: 30px;
+      line-height: 1.22;
+    }
+    .micro {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.34;
+    }
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 19px;
+      border: 1px solid var(--night);
+      border-radius: 8px;
+      background: var(--night);
+      color: var(--paper);
+      font-weight: 700;
+      transition: transform .22s var(--ease), background .22s var(--ease), color .22s var(--ease);
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn.light {
+      background: transparent;
+      color: var(--night);
+    }
+    .btn.color {
+      background: var(--orange);
+      color: var(--night);
+      border-color: var(--orange);
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 0 11px;
+      border: 1px solid rgba(50, 50, 50, .24);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .54);
+      color: rgba(50, 50, 50, .7);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    .grid { display: grid; gap: 20px; }
+    .two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .split {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 52px;
+      align-items: center;
+    }
+    .card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .56);
+    }
+    .pad { padding: 24px; }
+    .photo {
+      min-height: 320px;
+      background-size: cover;
+      background-position: center;
+    }
+    .photo.wide { aspect-ratio: 16 / 10; min-height: auto; }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      padding: 124px 0 46px;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 6% 6%, rgba(165, 162, 255, .9), rgba(165, 162, 255, 0) 31%),
+        radial-gradient(circle at 88% 22%, rgba(108, 235, 225, .72), rgba(108, 235, 225, 0) 30%),
+        radial-gradient(circle at 78% 92%, rgba(250, 148, 185, .56), rgba(250, 148, 185, 0) 28%),
+        var(--paper);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(50, 50, 50, .05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(50, 50, 50, .05) 1px, transparent 1px);
+      background-size: 54px 54px;
+      mask-image: radial-gradient(circle at 50% 42%, black 0%, transparent 72%);
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      min-height: calc(100vh - 170px);
+      display: grid;
+      grid-template-rows: 1fr auto;
+      gap: 42px;
+    }
+    .hero-copy {
+      align-self: end;
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 44px;
+      align-items: end;
+    }
+    .hero-side {
+      display: grid;
+      gap: 18px;
+    }
+    .signal-card {
+      position: relative;
+      min-height: 318px;
+      overflow: hidden;
+      border: 1px solid rgba(50, 50, 50, .16);
+      border-radius: 8px;
+      background:
+        linear-gradient(150deg, rgba(18,18,18,.08), rgba(18,18,18,.46)),
+        url("https://static.tildacdn.com/tild3034-3966-4838-a536-386266376464/cirali-beach.jpg");
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 28px 90px rgba(50, 50, 50, .16);
+    }
+    .signal-card span {
+      position: absolute;
+      border: 1px solid rgba(255, 255, 255, .72);
+      border-radius: 50%;
+      animation: pulseField 8s var(--ease) infinite alternate;
+    }
+    .signal-card span:nth-child(1) { inset: 30px; }
+    .signal-card span:nth-child(2) { inset: 78px 46px 42px 94px; animation-delay: -1s; }
+    .signal-card span:nth-child(3) { inset: 118px 116px 90px 48px; animation-delay: -2s; }
+    @keyframes pulseField {
+      from { opacity: .38; transform: scale(.96) rotate(-3deg); }
+      to { opacity: .92; transform: scale(1.04) rotate(4deg); }
+    }
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(255, 253, 248, .62);
+      backdrop-filter: blur(14px);
+    }
+    .metric {
+      min-height: 116px;
+      padding: 18px;
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .metric:last-child { border-right: 0; }
+    .metric b {
+      font-family: var(--heading);
+      font-size: 34px;
+      line-height: .9;
+    }
+
+    .quick-index {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-bottom: 1px solid var(--line);
+      background: var(--paper);
+    }
+    .quick-index a {
+      min-height: 138px;
+      padding: 20px;
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: background .22s var(--ease);
+    }
+    .quick-index a:last-child { border-right: 0; }
+    .quick-index a:nth-child(1):hover { background: var(--violet); }
+    .quick-index a:nth-child(2):hover { background: var(--orange); }
+    .quick-index a:nth-child(3):hover { background: var(--rose); }
+    .quick-index a:nth-child(4):hover { background: var(--cyan); }
+    .quick-index b { font-size: 22px; }
+
+    .featured-program {
+      display: grid;
+      grid-template-columns: .82fr 1.18fr;
+      min-height: 560px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+    }
+    .featured-visual {
+      position: relative;
+      min-height: 560px;
+      background:
+        linear-gradient(180deg, rgba(18,18,18,.03), rgba(18,18,18,.54)),
+        url("https://static.tildacdn.com/tild6337-6334-4534-b363-646336316430/yoga-studyosu.jpg");
+      background-size: cover;
+      background-position: center;
+    }
+    .featured-visual::after {
+      content: "open";
+      position: absolute;
+      left: 22px;
+      bottom: 18px;
+      color: rgba(255, 253, 248, .9);
+      font-family: var(--heading);
+      font-size: 72px;
+      line-height: .9;
+    }
+    .featured-copy {
+      padding: 42px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+    .program-list {
+      margin-top: 20px;
+      display: grid;
+      gap: 14px;
+    }
+    .program-mini {
+      display: grid;
+      grid-template-columns: 78px 1fr auto;
+      gap: 16px;
+      align-items: center;
+      min-height: 108px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255,255,255,.45);
+    }
+    .program-mini b {
+      font-family: var(--heading);
+      font-size: 30px;
+      line-height: .9;
+      color: var(--plum);
+    }
+    .program-mini p { margin: 0; font-size: 15px; }
+
+    .principles {
+      background: var(--night);
+      color: var(--paper);
+    }
+    .principles p,
+    .principles .micro,
+    .principles .eyebrow { color: rgba(255,253,248,.68); }
+    .principle-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.14);
+    }
+    .principle {
+      min-height: 330px;
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--night);
+    }
+    .principle:nth-child(1) { background: linear-gradient(145deg, rgba(165,162,255,.28), rgba(18,18,18,1) 58%); }
+    .principle:nth-child(2) { background: linear-gradient(145deg, rgba(255,173,78,.26), rgba(18,18,18,1) 58%); }
+    .principle:nth-child(3) { background: linear-gradient(145deg, rgba(108,235,225,.24), rgba(18,18,18,1) 58%); }
+    .principle strong {
+      font-family: var(--heading);
+      font-size: 64px;
+      line-height: .9;
+    }
+
+    .teachers {
+      background: var(--milk);
+    }
+    .teachers-head {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 44px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+    .teacher-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 1px;
+      border: 1px solid var(--line);
+      background: var(--line);
+    }
+    .teacher {
+      min-height: 286px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--paper);
+    }
+    .teacher:nth-child(2) { background: #f0eeff; }
+    .teacher:nth-child(3) { background: #fff0dc; }
+    .teacher:nth-child(4) { background: #ffe8f1; }
+    .teacher:nth-child(5) { background: #e7fffc; }
+    .teacher:nth-child(6) { background: #efe8df; }
+    .teacher b {
+      font-family: var(--heading);
+      font-size: 28px;
+      line-height: .98;
+    }
+
+    .archive-map {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+    .archive-photo {
+      min-height: 620px;
+      border-radius: 8px;
+      background:
+        linear-gradient(0deg, rgba(18,18,18,.26), rgba(18,18,18,.03)),
+        url("https://static.tildacdn.com/tild3766-3565-4631-a334-333462353835/havuz-bolgesi.jpg");
+      background-size: cover;
+      background-position: center;
+    }
+    .archive-list {
+      display: grid;
+      border-top: 1px solid var(--line);
+    }
+    .archive-row {
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      gap: 18px;
+      align-items: center;
+      min-height: 118px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .archive-row b {
+      font-family: var(--heading);
+      font-size: 28px;
+      line-height: .94;
+    }
+    .archive-row p { margin: 0; font-size: 15px; }
+
+    .resources {
+      background: var(--clay);
+    }
+    .resource-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr .8fr;
+      gap: 1px;
+      border: 1px solid var(--line);
+      background: var(--line);
+    }
+    .resource {
+      min-height: 360px;
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--paper);
+    }
+    .resource:first-child {
+      color: var(--paper);
+      background:
+        linear-gradient(0deg, rgba(18,18,18,.56), rgba(18,18,18,.05)),
+        url("https://static.tildacdn.com/tild3133-6531-4866-b763-353931373735/IMG_6058.jpg");
+      background-size: cover;
+      background-position: center;
+    }
+    .resource:first-child p,
+    .resource:first-child .micro { color: rgba(255,253,248,.78); }
+
+    .closing {
+      min-height: 500px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 88px 20px;
+      color: var(--paper);
+      background:
+        radial-gradient(circle at 20% 20%, rgba(165,162,255,.5), transparent 32%),
+        radial-gradient(circle at 78% 72%, rgba(108,235,225,.42), transparent 34%),
+        var(--night);
+    }
+    .closing h2, .closing .lead {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .closing p { color: rgba(255,253,248,.72); }
+
+    @media (max-width: 980px) {
+      .site-nav {
+        position: sticky;
+        top: 0;
+        left: 0;
+        transform: none;
+        width: 100%;
+        border-left: 0;
+        border-right: 0;
+        border-radius: 0;
+        grid-template-columns: 1fr auto;
+      }
+      .nav-links { display: none; }
+      .site-logo { width: 112px; }
+      .hero { padding-top: 46px; }
+      .hero-copy,
+      .split,
+      .featured-program,
+      .teachers-head,
+      .archive-map,
+      .resource-grid {
+        grid-template-columns: 1fr;
+      }
+      h1 { font-size: 76px; }
+      h2 { font-size: 56px; }
+      h3 { font-size: 30px; }
+      .lead { font-size: 24px; }
+      .hero-metrics,
+      .quick-index,
+      .principle-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .teacher-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .featured-visual { min-height: 420px; }
+      .archive-photo { min-height: 440px; }
+    }
+
+    @media (max-width: 560px) {
+      .container { width: min(100vw - 28px, 1180px); }
+      .section { padding: 72px 0; }
+      .site-nav { min-height: 58px; padding: 10px 14px; }
+      .site-nav .btn { min-height: 40px; padding: 0 13px; font-size: 14px; }
+      h1 { font-size: 42px; }
+      h2 { font-size: 38px; }
+      h3 { font-size: 26px; }
+      p { font-size: 17px; }
+      .lead { font-size: 21px; }
+      .hero-inner { min-height: auto; }
+      .hero-copy { gap: 28px; }
+      .signal-card { min-height: 248px; }
+      .hero-metrics,
+      .quick-index,
+      .principle-grid,
+      .teacher-grid {
+        grid-template-columns: 1fr;
+      }
+      .metric { border-right: 0; border-bottom: 1px solid var(--line); }
+      .metric:last-child { border-bottom: 0; }
+      .quick-index a { border-right: 0; border-bottom: 1px solid var(--line); }
+      .quick-index a:last-child { border-bottom: 0; }
+      .featured-copy { padding: 24px; }
+      .program-mini { grid-template-columns: 1fr; }
+      .teacher { min-height: 230px; }
+      .archive-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-nav">
+    <a href="#top" aria-label="HUMN homepage"><img class="site-logo" src="assets/humn-logo-horizontal.png" alt="HUMN" /></a>
+    <nav class="nav-links" aria-label="Навигация по главной">
+      <a href="#programs">Ретриты</a>
+      <a href="#teachers">Ведущие</a>
+      <a href="#archive">Архив</a>
+      <a href="#resources">Ресурсы</a>
+    </nav>
+    <a class="btn color" href="https://t.me/chikhalov" target="_blank" rel="noreferrer">Подобрать формат</a>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <div>
+            <p class="eyebrow">humn / retreats / practices / community</p>
+            <h1>пространство, где человек возвращается к себе</h1>
+            <p class="lead">HUMN собирает ретриты, практики, путешествия и ведущих, которые помогают телу, вниманию и жизни снова стать цельными.</p>
+            <div class="btn-row">
+              <a class="btn" href="#programs">Смотреть форматы</a>
+              <a class="btn light" href="#teachers">Ведущие, с которыми работали</a>
+            </div>
+          </div>
+          <aside class="hero-side" aria-label="Атмосфера HUMN">
+            <div class="signal-card">
+              <span></span><span></span><span></span>
+            </div>
+            <p class="micro">Первый экран строится не вокруг лица, а вокруг состояния: место, поле, движение, сигнал. Лицо организатора может появиться ниже, но не как главный визуальный якорь.</p>
+          </aside>
+        </div>
+
+        <div class="hero-metrics" aria-label="Ключевые сигналы доверия">
+          <div class="metric"><span class="micro">направления</span><b>4</b><span class="micro">ретриты, практики, кемпы, ресурсы</span></div>
+          <div class="metric"><span class="micro">география</span><b>4+</b><span class="micro">Турция, Бали, Таиланд, Тбилиси</span></div>
+          <div class="metric"><span class="micro">ведущие</span><b>6</b><span class="micro">люди, которые держали поле</span></div>
+          <div class="metric"><span class="micro">следующий шаг</span><b>1</b><span class="micro">подобрать формат под запрос</span></div>
+        </div>
+      </div>
+    </section>
+
+    <nav class="quick-index" aria-label="Быстрая навигация">
+      <a href="#programs"><span class="micro">01 / open</span><b>актуальные форматы</b></a>
+      <a href="#teachers"><span class="micro">02 / network</span><b>ведущие</b></a>
+      <a href="#archive"><span class="micro">03 / proof</span><b>что уже провели</b></a>
+      <a href="#resources"><span class="micro">04 / media</span><b>ресурсы</b></a>
+    </nav>
+
+    <section id="programs" class="section">
+      <div class="container">
+        <p class="eyebrow">актуальные входы</p>
+        <div class="featured-program">
+          <div class="featured-visual"></div>
+          <div class="featured-copy">
+            <div>
+              <div class="tag-row">
+                <span class="pill">open program</span>
+                <span class="pill">тело</span>
+                <span class="pill">энергия</span>
+                <span class="pill">медитация</span>
+              </div>
+              <h2>Tantra Training. Освобождение сексуальной энергии</h2>
+              <p class="lead">Главный открытый вход на сайте: глубокая работа с телом, близостью, вниманием и внутренней свободой.</p>
+              <p>В Tilda сюда ставим точные даты, стоимость и ссылку на актуальную страницу. Если набора сейчас нет, блок меняется на “лист ожидания”, не ломая структуру главной.</p>
+            </div>
+            <div class="btn-row">
+              <a class="btn" href="https://humns.ru/" target="_blank" rel="noreferrer">Открыть программу</a>
+              <a class="btn light" href="https://t.me/chikhalov" target="_blank" rel="noreferrer">Задать вопрос</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="program-list">
+          <a class="program-mini" href="https://humns.ru/camp_turkey" target="_blank" rel="noreferrer">
+            <b>02</b>
+            <div><h3>Кемпы и ретриты у моря</h3><p>Длинный формат жизни, практики, отдыха и интеграции в группе.</p></div>
+            <span class="pill">archive / repeat</span>
+          </a>
+          <a class="program-mini" href="https://humns.ru/" target="_blank" rel="noreferrer">
+            <b>03</b>
+            <div><h3>Городские практики и встречи</h3><p>Короткий вход в поле HUMN без дальней поездки.</p></div>
+            <span class="pill">coming soon</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="principles section">
+      <div class="container">
+        <p class="eyebrow">что отличает HUMN</p>
+        <h2>не просто ретриты, а среда для изменений</h2>
+        <div class="principle-grid">
+          <article class="principle">
+            <strong>01</strong>
+            <div><h3>Живое тело</h3><p>Практики возвращают внимание из головы в ощущения, дыхание, движение и контакт.</p></div>
+          </article>
+          <article class="principle">
+            <strong>02</strong>
+            <div><h3>Безопасная глубина</h3><p>Форматы строятся вокруг бережности, ясных границ и доверительного поля группы.</p></div>
+          </article>
+          <article class="principle">
+            <strong>03</strong>
+            <div><h3>Интеграция</h3><p>Опыт не заканчивается на ретрите: человек уезжает с практиками, состоянием и новым контактом с собой.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="teachers" class="teachers section">
+      <div class="container">
+        <div class="teachers-head">
+          <div>
+            <p class="eyebrow">ведущие, с которыми работали</p>
+            <h2>люди, которые держали поле</h2>
+          </div>
+          <p class="lead">Этот блок должен быть одним из главных на странице: HUMN — это не только страны и даты, а сеть ведущих, через которых происходила работа.</p>
+        </div>
+
+        <div class="teacher-grid">
+          <article class="teacher"><span class="pill">tantra therapy</span><b>Хома и Мукто</b><p class="micro">международные тантра-терапевты, ретриты и глубокие тренинги</p></article>
+          <article class="teacher"><span class="pill">group work</span><b>Георгий Голобоков</b><p class="micro">тантрические кемпы, контакт, групповое поле</p></article>
+          <article class="teacher"><span class="pill">chakra / power</span><b>СамудроПрем</b><p class="micro">чакры, внутренняя сила, трансформация и интеграция</p></article>
+          <article class="teacher"><span class="pill">bodywork</span><b>Сатьярти</b><p class="micro">тантра, кашмирский массаж, работа с телом</p></article>
+          <article class="teacher"><span class="pill">sensitivity</span><b>Сева Прем</b><p class="micro">практики тонкой чувствительности и присутствия</p></article>
+          <article class="teacher"><span class="pill">host</span><b>Юрий Чикалов</b><p class="micro">организация пространства, подбор формата и сопровождение</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="archive" class="section">
+      <div class="container archive-map">
+        <div class="archive-photo" aria-label="Место ретрита"></div>
+        <div>
+          <p class="eyebrow">архив проведённых программ</p>
+          <h2>место + формат + ведущий</h2>
+          <p>Архив на главной работает как доказательство опыта. Не просто “мы были в Турции”, а “мы собирали конкретные поля с конкретными ведущими”.</p>
+          <div class="archive-list">
+            <div class="archive-row"><b>Чиралы</b><p>Турция / тантрический кемп / Георгий Голобоков</p></div>
+            <div class="archive-row"><b>Осознанная тантра</b><p>Хома и Мукто / ретрит / Турция и Азия</p></div>
+            <div class="archive-row"><b>Путь силы</b><p>СамудроПрем / чакры / интенсивная трансформация</p></div>
+            <div class="archive-row"><b>Тбилиси</b><p>городские практики / Сева Прем / тонкая чувствительность</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="resources" class="resources section">
+      <div class="container">
+        <p class="eyebrow">ресурсы и сообщество</p>
+        <h2>следующий шаг не всегда ретрит</h2>
+        <div class="resource-grid">
+          <article class="resource">
+            <div><h3>Канал HUMN</h3><p>Анонсы, мысли, рекомендации, следы прошедших поездок и живой контакт с полем.</p></div>
+            <span class="pill">telegram / media</span>
+          </article>
+          <article class="resource">
+            <div><h3>Подбор формата</h3><p>Если человек не понимает, что ему подходит, лучше вести его в диалог, а не бросать в список страниц.</p></div>
+            <a class="btn light" href="https://t.me/chikhalov" target="_blank" rel="noreferrer">Написать</a>
+          </article>
+          <article class="resource">
+            <div><h3>Материалы</h3><p>Практики, посты, записи и рекомендации, которые можно использовать между ретритами.</p></div>
+            <span class="pill">coming soon</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div class="container">
+        <h2>выбрать путь проще, когда есть живой контакт</h2>
+        <p class="lead">Напиши, если хочешь понять, какой формат HUMN сейчас подходит именно тебе.</p>
+        <div class="btn-row" style="justify-content:center">
+          <a class="btn color" href="https://t.me/chikhalov" target="_blank" rel="noreferrer">Подобрать формат</a>
+          <a class="btn" href="#programs">Смотреть программы</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
