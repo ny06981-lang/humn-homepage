@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>HUMN homepage main concept</title>
+  <title>Human homepage main concept</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23fffdf8'/%3E%3Ccircle cx='32' cy='32' r='22' fill='%23a5a2ff'/%3E%3Ccircle cx='32' cy='32' r='12' fill='%23ffad4e'/%3E%3C/svg%3E" />
   <style>
     :root {
@@ -56,7 +56,18 @@
       backdrop-filter: blur(22px);
       box-shadow: 0 18px 60px rgba(50, 50, 50, .08);
     }
-    .site-logo { width: 128px; height: auto; }
+    .site-logo {
+      display: inline-flex;
+      align-items: center;
+      min-width: 106px;
+      color: var(--night);
+      font-family: var(--heading);
+      font-size: 25px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
     .nav-links {
       justify-self: center;
       display: flex;
@@ -694,7 +705,7 @@
         grid-template-columns: 1fr auto;
       }
       .nav-links { display: none; }
-      .site-logo { width: 112px; }
+      .site-logo { min-width: 92px; font-size: 22px; }
       .hero { padding-top: 46px; }
       .hero-copy,
       .split,
@@ -776,7 +787,7 @@
 </head>
 <body>
   <header class="site-nav">
-    <a href="#top" aria-label="HUMN homepage"><img class="site-logo" src="assets/humn-logo-horizontal.png" alt="HUMN" /></a>
+    <a class="site-logo" href="#top" aria-label="Human homepage">Human</a>
     <nav class="nav-links" aria-label="Навигация по главной">
       <a href="#programs">Ретриты</a>
       <a href="#teachers">Мастера</a>
@@ -791,15 +802,15 @@
       <div class="container hero-inner">
         <div class="hero-copy">
           <div>
-            <p class="eyebrow">humn / retreats / practices / community</p>
+            <p class="eyebrow">human / retreats / practices / community</p>
             <h1>Пространство, где человек возвращается к себе</h1>
-            <p class="lead">HUMN собирает ретриты, практики, путешествия и мастеров, которые помогают телу, вниманию и жизни снова стать цельными.</p>
+            <p class="lead">Human собирает ретриты, практики, путешествия и мастеров, которые помогают телу, вниманию и жизни снова стать цельными.</p>
             <div class="btn-row">
               <a class="btn" href="#programs">Смотреть форматы</a>
               <a class="btn light" href="#teachers">Наши мастера</a>
             </div>
           </div>
-          <aside class="hero-side" aria-label="Атмосфера HUMN">
+          <aside class="hero-side" aria-label="Атмосфера Human">
             <div class="signal-card">
               <span></span><span></span><span></span>
             </div>
@@ -860,7 +871,7 @@
           </a>
           <a class="program-mini" href="https://humns.ru/" target="_blank" rel="noreferrer">
             <b>03</b>
-            <div><h3>Городские практики и встречи</h3><p>Короткий вход в поле HUMN без дальней поездки.</p></div>
+            <div><h3>Городские практики и встречи</h3><p>Короткий вход в поле Human без дальней поездки.</p></div>
             <span class="pill">coming soon</span>
           </a>
         </div>
@@ -869,7 +880,7 @@
 
     <section class="principles section">
       <div class="container">
-        <p class="eyebrow">что отличает HUMN</p>
+        <p class="eyebrow">что отличает Human</p>
         <h2>Не просто ретриты, а среда для изменений</h2>
         <div class="principle-grid">
           <article class="principle">
@@ -895,10 +906,10 @@
             <p class="eyebrow">Наши мастера</p>
             <h2>Лучшие ведущие со всего мира</h2>
           </div>
-          <p class="lead">HUMN — это не только страны и даты, а сеть мастеров, через которых происходит работа.</p>
+          <p class="lead">Human — это не только страны и даты, а сеть мастеров, через которых происходит работа.</p>
         </div>
 
-        <div class="teacher-marquee" aria-label="Мастера HUMN">
+        <div class="teacher-marquee" aria-label="Мастера Human">
           <div class="teacher-track">
             <div class="teacher-set">
               <article class="teacher"><div class="teacher-avatar"><img src="assets/teachers/homa-mukto.jpg" alt="Хома и Мукто" loading="eager" /></div><div class="teacher-meta"><span class="teacher-country">Бразилия</span><span class="pill">tantra therapy</span></div><b>Хома и Мукто</b><p class="micro">международные тантра-терапевты, ретриты и глубокие тренинги</p></article>
@@ -925,12 +936,11 @@
       <div class="container">
         <div class="archive-intro">
           <div>
-            <p class="eyebrow">выполненные проекты</p>
-            <h2>Кейсы проведённых ретритов</h2>
+            <p class="eyebrow">кейсы проведённых ретритов</p>
+            <h2>Выполненные проекты</h2>
           </div>
           <p class="lead">Не просто география и даты — здесь важны ведущие, формат работы и опыт, который участники уносят с собой.</p>
         </div>
-
         <article class="case-study">
           <div class="case-visual">
             <span class="case-status">прошедший проект</span>
@@ -972,7 +982,7 @@
         <h2>Следующий шаг не всегда ретрит</h2>
         <div class="resource-grid">
           <article class="resource">
-            <div><h3>Канал HUMN</h3><p>Анонсы, мысли, рекомендации, следы прошедших поездок и живой контакт с полем.</p></div>
+            <div><h3>Канал Human</h3><p>Анонсы, мысли, рекомендации, следы прошедших поездок и живой контакт с полем.</p></div>
             <span class="pill">telegram / media</span>
           </article>
           <article class="resource">
@@ -990,7 +1000,7 @@
     <section class="closing">
       <div class="container">
         <h2>Выбрать путь проще, когда есть живой контакт</h2>
-        <p class="lead">Напиши, если хочешь понять, какой формат HUMN сейчас подходит именно тебе.</p>
+        <p class="lead">Напиши, если хочешь понять, какой формат Human сейчас подходит именно тебе.</p>
         <div class="btn-row" style="justify-content:center">
           <a class="btn color" href="https://t.me/chikhalov" target="_blank" rel="noreferrer">Подобрать формат</a>
           <a class="btn" href="#programs">Смотреть программы</a>
