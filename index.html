@@ -552,97 +552,107 @@
       max-width: 620px;
       margin-bottom: 8px;
     }
-    .case-study {
-      min-height: 520px;
-      display: grid;
-      grid-template-columns: .82fr 1.18fr;
+    .case-carousel {
+      position: relative;
       overflow: hidden;
       border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--paper);
-      box-shadow: 0 24px 70px rgba(50,50,50,.1);
-    }
-    .case-visual {
-      min-height: 520px;
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 32px;
-      color: var(--paper);
       background:
-        linear-gradient(180deg, rgba(18,18,18,.06), rgba(18,18,18,.7)),
-        url("https://static.tildacdn.com/tild3034-3966-4838-a536-386266376464/cirali-beach.jpg");
-      background-size: cover;
-      background-position: center;
-    }
-    .case-visual h3 {
-      max-width: 520px;
-      margin: 0;
-      font-size: 54px;
-      line-height: 1.16;
-    }
-    .case-status {
-      align-self: flex-start;
-      min-height: 32px;
-      padding: 7px 11px;
-      border: 1px solid rgba(255,255,255,.54);
-      border-radius: 999px;
-      background: rgba(18,18,18,.22);
-      backdrop-filter: blur(12px);
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-    }
-    .case-visual .micro { color: rgba(255,253,248,.76); }
-    .case-details {
-      padding: 36px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 30px;
-      background:
-        radial-gradient(circle at 100% 0%, rgba(165,162,255,.22), transparent 38%),
-        radial-gradient(circle at 0% 100%, rgba(108,235,225,.18), transparent 34%),
+        linear-gradient(90deg, rgba(165,162,255,.28), rgba(255,173,78,.22) 38%, rgba(108,235,225,.22)),
         var(--paper);
     }
-    .case-meta {
+    .case-carousel::before,
+    .case-carousel::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      z-index: 2;
+      width: 96px;
+      height: 100%;
+      pointer-events: none;
+    }
+    .case-carousel::before {
+      left: 0;
+      background: linear-gradient(90deg, var(--paper), rgba(255,253,248,0));
+    }
+    .case-carousel::after {
+      right: 0;
+      background: linear-gradient(270deg, var(--paper), rgba(255,253,248,0));
+    }
+    .case-track {
+      display: flex;
+      width: max-content;
+      animation: caseFlow 58s linear infinite;
+    }
+    .case-carousel:hover .case-track { animation-play-state: paused; }
+    .case-set {
+      display: flex;
+      gap: 14px;
+      padding: 18px 7px;
+    }
+    .case-card {
+      flex: 0 0 372px;
+      min-height: 318px;
+      padding: 18px;
+      border: 1px solid rgba(50,50,50,.18);
+      border-radius: 8px;
+      background: rgba(255,253,248,.86);
+      box-shadow: 0 18px 46px rgba(50,50,50,.1);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .case-card:nth-child(2n) { transform: translateY(14px); }
+    .case-card:nth-child(3n) { background: rgba(240,238,255,.9); }
+    .case-card:nth-child(4n) { background: rgba(231,255,252,.88); }
+    .case-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      min-height: 76px;
+    }
+    .case-top b {
+      font-family: var(--heading);
+      font-size: 28px;
+      line-height: 1.42;
+    }
+    .case-number {
+      font-family: var(--heading);
+      font-size: 46px;
+      line-height: 1;
+      color: rgba(81,39,64,.28);
+    }
+    .case-fields {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 1px;
       border: 1px solid var(--line);
       background: var(--line);
     }
-    .case-meta-item {
-      min-height: 92px;
-      padding: 15px;
+    .case-field {
+      min-height: 70px;
+      padding: 11px;
+      background: rgba(255,253,248,.7);
       display: flex;
       flex-direction: column;
-      gap: 9px;
-      background: rgba(255,253,248,.84);
+      gap: 7px;
+      justify-content: flex-start;
     }
-    .case-meta-item span {
-      color: var(--muted);
+    .case-field span:first-child {
       font-size: 11px;
       line-height: 1.2;
       text-transform: uppercase;
       letter-spacing: .08em;
+      color: rgba(50,50,50,.54);
     }
-    .case-meta-item b {
-      font-family: var(--heading);
-      font-size: 21px;
-      line-height: 1.32;
+    .case-field span:last-child {
+      font-size: 14px;
+      line-height: 1.3;
     }
-    .case-summary {
-      margin: 0;
-      color: var(--ink);
-      font-size: 21px;
-      line-height: 1.42;
-    }
-    .case-focus {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+    .case-card p { margin: 0; font-size: 16px; }
+    @keyframes caseFlow {
+      from { transform: translate3d(-50%, 0, 0); }
+      to { transform: translate3d(0, 0, 0); }
     }
 
     .resources {
@@ -712,7 +722,6 @@
       .featured-program,
       .teachers-head,
       .archive-intro,
-      .case-study,
       .resource-grid {
         grid-template-columns: 1fr;
       }
@@ -727,7 +736,7 @@
       }
       .teacher { flex-basis: 304px; }
       .featured-visual { min-height: 420px; }
-      .case-visual { min-height: 360px; }
+      .case-card { flex-basis: 344px; }
     }
 
     @media (max-width: 560px) {
@@ -763,15 +772,16 @@
         padding: 18px;
       }
       .teacher-avatar { width: 116px; height: 116px; }
-      .case-study { min-height: 0; }
-      .case-visual {
-        min-height: 380px;
-        padding: 22px;
+      .case-carousel::before,
+      .case-carousel::after { width: 34px; }
+      .case-set { gap: 10px; padding: 14px 5px; }
+      .case-card {
+        flex-basis: 286px;
+        min-height: 370px;
+        padding: 15px;
       }
-      .case-visual h3 { font-size: 38px; }
-      .case-details { padding: 22px; }
-      .case-meta { grid-template-columns: 1fr; }
-      .case-summary { font-size: 18px; }
+      .case-card:nth-child(2n) { transform: translateY(10px); }
+      .case-fields { grid-template-columns: 1fr; }
     }
     @media (prefers-reduced-motion: reduce) {
       .teacher-marquee {
@@ -782,6 +792,14 @@
       .teacher-marquee::after { display: none; }
       .teacher-track { animation: none; }
       .teacher-set[aria-hidden="true"] { display: none; }
+      .case-carousel {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .case-carousel::before,
+      .case-carousel::after { display: none; }
+      .case-track { animation: none; }
+      .case-set[aria-hidden="true"] { display: none; }
     }
   </style>
 </head>
@@ -941,38 +959,24 @@
           </div>
           <p class="lead">Не просто география и даты — здесь важны ведущие, формат работы и опыт, который участники уносят с собой.</p>
         </div>
-        <article class="case-study">
-          <div class="case-visual">
-            <span class="case-status">прошедший проект</span>
-            <div>
-              <p class="micro">Чиралы · Турция · 2025</p>
-              <h3>Осознанная тантра</h3>
+        <div class="case-carousel" aria-label="Шаблоны кейсов выполненных проектов">
+          <div class="case-track">
+            <div class="case-set">
+              <article class="case-card"><div class="case-top"><b>Название ретрита</b><span class="case-number">01</span></div><div class="case-fields"><div class="case-field"><span>ведущий</span><span>Имя мастера</span></div><div class="case-field"><span>страна</span><span>Страна</span></div><div class="case-field"><span>участники</span><span>кол-во человек</span></div><div class="case-field"><span>дата</span><span>месяц, год</span></div></div><p>Короткий текст о том, что происходило на ретрите и какой опыт получил участник.</p></article>
+              <article class="case-card"><div class="case-top"><b>Название ретрита</b><span class="case-number">02</span></div><div class="case-fields"><div class="case-field"><span>ведущий</span><span>Имя мастера</span></div><div class="case-field"><span>страна</span><span>Страна</span></div><div class="case-field"><span>участники</span><span>кол-во человек</span></div><div class="case-field"><span>дата</span><span>месяц, год</span></div></div><p>Один абзац: место, формат, глубина процесса и чем этот проект был важен для Human.</p></article>
+              <article class="case-card"><div class="case-top"><b>Название ретрита</b><span class="case-number">03</span></div><div class="case-fields"><div class="case-field"><span>ведущий</span><span>Имя мастера</span></div><div class="case-field"><span>страна</span><span>Страна</span></div><div class="case-field"><span>участники</span><span>кол-во человек</span></div><div class="case-field"><span>дата</span><span>месяц, год</span></div></div><p>Короткая история проекта: запрос группы, практика, место и видимый результат.</p></article>
+              <article class="case-card"><div class="case-top"><b>Название ретрита</b><span class="case-number">04</span></div><div class="case-fields"><div class="case-field"><span>ведущий</span><span>Имя мастера</span></div><div class="case-field"><span>страна</span><span>Страна</span></div><div class="case-field"><span>участники</span><span>кол-во человек</span></div><div class="case-field"><span>дата</span><span>месяц, год</span></div></div><p>Здесь будет короткий текст без воды: почему этот ретрит стоит показать как кейс.</p></article>
+              <article class="case-card"><div class="case-top"><b>Название ретрита</b><span class="case-number">05</span></div><div class="case-fields"><div class="case-field"><span>ведущий</span><span>Имя мастера</span></div><div class="case-field"><span>страна</span><span>Страна</span></div><div class="case-field"><span>участники</span><span>кол-во человек</span></div><div class="case-field"><span>дата</span><span>месяц, год</span></div></div><p>Мини-описание проекта на 1-2 строки, чтобы карточка читалась быстро в движении.</p></article>
+            </div>
+            <div class="case-set" aria-hidden="true">
+              <article class="case-card"><div class="case-top"><b>Название ретрита</b><span class="case-number">01</span></div><div class="case-fields"><div class="case-field"><span>ведущий</span><span>Имя мастера</span></div><div class="case-field"><span>страна</span><span>Страна</span></div><div class="case-field"><span>участники</span><span>кол-во человек</span></div><div class="case-field"><span>дата</span><span>месяц, год</span></div></div><p>Короткий текст о том, что происходило на ретрите и какой опыт получил участник.</p></article>
+              <article class="case-card"><div class="case-top"><b>Название ретрита</b><span class="case-number">02</span></div><div class="case-fields"><div class="case-field"><span>ведущий</span><span>Имя мастера</span></div><div class="case-field"><span>страна</span><span>Страна</span></div><div class="case-field"><span>участники</span><span>кол-во человек</span></div><div class="case-field"><span>дата</span><span>месяц, год</span></div></div><p>Один абзац: место, формат, глубина процесса и чем этот проект был важен для Human.</p></article>
+              <article class="case-card"><div class="case-top"><b>Название ретрита</b><span class="case-number">03</span></div><div class="case-fields"><div class="case-field"><span>ведущий</span><span>Имя мастера</span></div><div class="case-field"><span>страна</span><span>Страна</span></div><div class="case-field"><span>участники</span><span>кол-во человек</span></div><div class="case-field"><span>дата</span><span>месяц, год</span></div></div><p>Короткая история проекта: запрос группы, практика, место и видимый результат.</p></article>
+              <article class="case-card"><div class="case-top"><b>Название ретрита</b><span class="case-number">04</span></div><div class="case-fields"><div class="case-field"><span>ведущий</span><span>Имя мастера</span></div><div class="case-field"><span>страна</span><span>Страна</span></div><div class="case-field"><span>участники</span><span>кол-во человек</span></div><div class="case-field"><span>дата</span><span>месяц, год</span></div></div><p>Здесь будет короткий текст без воды: почему этот ретрит стоит показать как кейс.</p></article>
+              <article class="case-card"><div class="case-top"><b>Название ретрита</b><span class="case-number">05</span></div><div class="case-fields"><div class="case-field"><span>ведущий</span><span>Имя мастера</span></div><div class="case-field"><span>страна</span><span>Страна</span></div><div class="case-field"><span>участники</span><span>кол-во человек</span></div><div class="case-field"><span>дата</span><span>месяц, год</span></div></div><p>Мини-описание проекта на 1-2 строки, чтобы карточка читалась быстро в движении.</p></article>
             </div>
           </div>
-
-          <div class="case-details">
-            <div class="case-meta">
-              <div class="case-meta-item"><span>ведущие</span><b>Хома и Мукто</b></div>
-              <div class="case-meta-item"><span>даты</span><b>24–29 июня 2025</b></div>
-              <div class="case-meta-item"><span>место</span><b>Чиралы, Турция</b></div>
-              <div class="case-meta-item"><span>формат</span><b>5 дней групповой работы</b></div>
-            </div>
-
-            <p class="case-summary">Ретрит объединил практики присутствия, дыхание, медитации и групповые шеринги. В фокусе были связь с жизненной энергией, близость, уязвимость и интеграция опыта в повседневную жизнь.</p>
-
-            <div class="case-focus" aria-label="Основные направления ретрита">
-              <span class="pill">присутствие</span>
-              <span class="pill">дыхание</span>
-              <span class="pill">медитация</span>
-              <span class="pill">близость</span>
-              <span class="pill">интеграция</span>
-            </div>
-
-            <div class="btn-row">
-              <a class="btn light" href="https://humns.ru/eng" target="_blank" rel="noreferrer">Смотреть страницу проекта</a>
-            </div>
-          </div>
-        </article>
+        </div>
       </div>
     </section>
 
