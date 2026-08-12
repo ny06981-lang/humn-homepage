@@ -433,6 +433,7 @@
       border-radius: 8px;
       background: var(--paper);
     }
+    .featured-program + .featured-program { margin-top: 20px; }
     .featured-visual {
       position: relative;
       min-height: 560px;
@@ -452,6 +453,8 @@
       font-size: 72px;
       line-height: 1;
     }
+    .featured-samudro .featured-visual { background-image: linear-gradient(180deg, rgba(18,18,18,.02), rgba(18,18,18,.5)), url("assets/retreats/samudro-chiraly.jpg"); background-position: center; }
+    .featured-samudro .featured-visual::after { content: "chiraly"; }
     .featured-copy {
       padding: 42px;
       display: flex;
@@ -1054,7 +1057,9 @@
     <section id="programs" class="section">
       <div class="human-container">
         <p class="eyebrow">Ближайшие мероприятия</p>
-        <div class="featured-program">
+        <div class="featured-program featured-samudro"><div class="featured-visual"></div><div class="featured-copy"><div><div class="tag-row"><span class="pill">Турция / Чиралы</span><span class="pill">27 сентября – 8 октября 2026</span><span class="pill">СамудроПрем</span><span class="pill">чакры / тантра / дао</span></div><h2>Чакра · Тантра · Дао с СамудроПрем</h2><p class="lead">Глубокий ретрит для тех, кто хочет исследовать тело и энергию, освободиться от привычных ограничений и вернуть контакт со своей внутренней силой.</p><p>Программа объединяет работу с чакрами, тантрические и даосские практики, медитации, дыхание и вечернюю интеграцию в группе.</p><div class="program-facts"><div class="program-fact"><span class="micro">даты</span><b>27 сентября – 8 октября</b><span class="micro">12 дней глубокого процесса</span></div><div class="program-fact"><span class="micro">место</span><b>Чиралы, Турция</b><span class="micro">море, горы и пространство для практики</span></div><div class="program-fact"><span class="micro">мастер</span><b>СамудроПрем</b><span class="micro">психотерапия, медитация и работа с энергией</span></div><div class="program-fact"><span class="micro">направления</span><b>Чакра · Тантра · Дао</b><span class="micro">тело, энергия, отношения и интеграция</span></div></div></div><div class="btn-row"><a class="btn color" href="https://humns.ru/chakra-tantra-dao">Открыть ретрит</a><a class="btn light" href="https://t.me/chikhalov" target="_blank" rel="noopener noreferrer">Задать вопрос</a></div></div></div>
+
+        <div class="featured-program featured-homa">
           <div class="featured-visual"></div>
           <div class="featured-copy">
             <div>
@@ -1080,35 +1085,6 @@
             </div>
           </div>
         </div>
-
-        <article class="upcoming-retreat" aria-label="Анонс ретрита СамудроПрем">
-          <div class="upcoming-media"></div>
-          <div class="upcoming-copy">
-            <div>
-              <div class="tag-row">
-                <span class="pill">Турция / Чиралы</span>
-                <span class="pill">27 сентября - 8 октября 2026</span>
-                <span class="pill">СамудроПрем</span>
-                <span class="pill">чакры / тантра / дао</span>
-              </div>
-              <div class="upcoming-head">
-                <div>
-                  <h3>Чакра · Тантра · Дао: ретрит с СамудроПрем</h3>
-                  <p class="lead">Новый выезд Human в Чиралы для тех, кто хочет пройти работу через тело, энергию, отношения и внутреннюю силу.</p>
-                </div>
-                <div class="upcoming-host">
-                  <img src="assets/retreats/samudro-prem.jpg" width="963" height="1080" alt="СамудроПрем" loading="lazy" decoding="async">
-                  <div><b>СамудроПрем</b><span>мастер ретрита</span></div>
-                </div>
-              </div>
-              <p>Программа соединяет тантрические практики, работу с чакрами, даосскую циркуляцию энергии, медитации, дыхание и вечернюю интеграцию в группе.</p>
-            </div>
-            <div class="btn-row">
-              <a class="btn color" href="https://humns.ru/chakra-tantra-dao">Смотреть страницу</a>
-              <a class="btn light" href="https://t.me/chikhalov" target="_blank" rel="noopener noreferrer">Задать вопрос</a>
-            </div>
-          </div>
-        </article>
       </div>
     </section>
 
