@@ -3,8 +3,69 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Human homepage main concept</title>
+  <title>Human - ретриты, практики и мастера по всему миру</title>
+  <meta name="description" content="Human собирает ретриты, практики, путешествия и мастеров для возвращения к телу, вниманию и живому контакту с собой." />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#fffdf8" />
+  <link rel="canonical" href="https://humns.ru/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Human" />
+  <meta property="og:title" content="Human - ретриты, практики и мастера по всему миру" />
+  <meta property="og:description" content="Актуальные ретриты, выполненные проекты, мастера Human и ресурсы для практики между выездами." />
+  <meta property="og:url" content="https://humns.ru/" />
+  <meta property="og:image" content="https://ny06981-lang.github.io/humn-homepage/assets/retreats/samudro-chiraly.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Human - ретриты, практики и мастера по всему миру" />
+  <meta name="twitter:description" content="Актуальные ретриты, выполненные проекты, мастера Human и ресурсы для практики между выездами." />
+  <meta name="twitter:image" content="https://ny06981-lang.github.io/humn-homepage/assets/retreats/samudro-chiraly.jpg" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23fffdf8'/%3E%3Ccircle cx='32' cy='32' r='22' fill='%23a5a2ff'/%3E%3Ccircle cx='32' cy='32' r='12' fill='%23ffad4e'/%3E%3C/svg%3E" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://humns.ru/#organization",
+          "name": "Human",
+          "url": "https://humns.ru/",
+          "logo": "https://ny06981-lang.github.io/humn-homepage/assets/humn-logo-horizontal.png",
+          "sameAs": [
+            "https://www.instagram.com/humns.ru/"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://humns.ru/#website",
+          "url": "https://humns.ru/",
+          "name": "Human",
+          "publisher": {
+            "@id": "https://humns.ru/#organization"
+          },
+          "inLanguage": "ru"
+        },
+        {
+          "@type": "ItemList",
+          "@id": "https://humns.ru/#retreats",
+          "name": "Актуальные ретриты Human",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "url": "https://humns.ru/tantra1_rus",
+              "name": "Тантра с Хомой и Муктой на Бали"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "url": "https://humns.ru/chakra-tantra-dao",
+              "name": "Чакра · Тантра · Дао с СамудроПрем"
+            }
+          ]
+        }
+      ]
+    }
+  </script>
   <style>
     :root {
       --ink: #323232;
@@ -36,6 +97,41 @@
     a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
     button { font: inherit; }
+    :focus-visible {
+      outline: 3px solid var(--orange);
+      outline-offset: 4px;
+      border-radius: 8px;
+    }
+    .skip-link {
+      position: absolute;
+      z-index: 200;
+      top: auto;
+      left: -10000px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      transform: none;
+      padding: 0;
+      border-radius: 8px;
+      background: var(--night);
+      color: var(--paper);
+      font-weight: 800;
+      transition: transform .2s var(--ease);
+    }
+    .skip-link:focus {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      width: auto;
+      height: auto;
+      overflow: visible;
+      clip: auto;
+      clip-path: none;
+      transform: translateY(0);
+      padding: 12px 16px;
+    }
 
     .site-nav {
       position: relative;
@@ -874,6 +970,15 @@
       .case-fields { grid-template-columns: 1fr; }
     }
     @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *,
+      *::before,
+      *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .001ms !important;
+      }
       .teacher-marquee {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
@@ -894,6 +999,7 @@
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">К основному контенту</a>
   <header class="site-nav">
     <a class="site-logo" href="#top" aria-label="Human homepage">Human</a>
     <nav class="nav-links" aria-label="Навигация по главной">
@@ -902,10 +1008,11 @@
       <a href="#archive">Проекты</a>
       <a href="#resources">Ресурсы</a>
     </nav>
-    <a class="btn color" href="https://t.me/chikhalov" target="_blank" rel="noreferrer">Подобрать формат</a>
+    <a class="btn color" href="https://t.me/chikhalov" target="_blank" rel="noopener noreferrer">Подобрать формат</a>
   </header>
 
-  <main id="top">
+  <main id="main" tabindex="-1">
+    <div id="top"></div>
     <section class="hero">
       <div class="container hero-inner">
         <div class="hero-copy">
@@ -965,8 +1072,8 @@
               </div>
             </div>
             <div class="btn-row">
-              <a class="btn" href="https://humns.ru/tantra1_rus" target="_blank" rel="noreferrer">Открыть ретрит</a>
-              <a class="btn light" href="https://t.me/chikhalov" target="_blank" rel="noreferrer">Задать вопрос</a>
+              <a class="btn" href="https://humns.ru/tantra1_rus">Открыть ретрит</a>
+              <a class="btn light" href="https://t.me/chikhalov" target="_blank" rel="noopener noreferrer">Задать вопрос</a>
             </div>
           </div>
         </div>
@@ -977,12 +1084,12 @@
             <div><h3>Чакра · Тантра · Дао с СамудроПрем</h3><p>27 сентября - 8 октября 2026, Чиралы: глубокий процесс через чакры, тело, энергию и интеграцию.</p></div>
             <span class="pill">анонс</span>
           </a>
-          <a class="program-mini" href="https://humns.ru/camp_turkey" target="_blank" rel="noreferrer">
+          <a class="program-mini" href="https://humns.ru/camp_turkey">
             <b>03</b>
             <div><h3>Кемпы и ретриты у моря</h3><p>Длинный формат жизни, практики, отдыха и интеграции в группе.</p></div>
             <span class="pill">archive / repeat</span>
           </a>
-          <a class="program-mini" href="https://humns.ru/" target="_blank" rel="noreferrer">
+          <a class="program-mini" href="https://humns.ru/">
             <b>04</b>
             <div><h3>Городские практики и встречи</h3><p>Короткий вход в поле Human без дальней поездки.</p></div>
             <span class="pill">coming soon</span>
@@ -1005,7 +1112,7 @@
                   <p class="lead">Новый выезд Human в Чиралы для тех, кто хочет пройти работу через тело, энергию, отношения и внутреннюю силу.</p>
                 </div>
                 <div class="upcoming-host">
-                  <img src="assets/retreats/samudro-prem.jpg" alt="СамудроПрем" loading="eager" />
+                  <img src="assets/retreats/samudro-prem.jpg" width="963" height="1080" alt="СамудроПрем" loading="lazy" decoding="async" />
                   <div><b>СамудроПрем</b><span>мастер ретрита</span></div>
                 </div>
               </div>
@@ -1013,7 +1120,7 @@
             </div>
             <div class="btn-row">
               <a class="btn color" href="https://humns.ru/chakra-tantra-dao">Смотреть страницу</a>
-              <a class="btn light" href="https://t.me/chikhalov" target="_blank" rel="noreferrer">Задать вопрос</a>
+              <a class="btn light" href="https://t.me/chikhalov" target="_blank" rel="noopener noreferrer">Задать вопрос</a>
             </div>
           </div>
         </article>
@@ -1054,20 +1161,20 @@
         <div class="teacher-marquee" aria-label="Мастера Human">
           <div class="teacher-track">
             <div class="teacher-set">
-              <article class="teacher"><div class="teacher-avatar"><img src="assets/teachers/homa-mukto.jpg" alt="Хома и Мукто" loading="eager" /></div><div class="teacher-meta"><span class="teacher-country">Бразилия</span><span class="pill">tantra therapy</span></div><b>Хома и Мукто</b><p class="micro">международные тантра-терапевты, ретриты и глубокие тренинги</p></article>
-              <article class="teacher"><div class="teacher-avatar"><img src="assets/teachers/georgy-golobokov.jpg" alt="Георгий Голобоков" loading="eager" /></div><div class="teacher-meta"><span class="teacher-country">Россия</span><span class="pill">group work</span></div><b>Георгий Голобоков</b><p class="micro">тантрические кемпы, контакт, групповое поле</p></article>
-              <article class="teacher"><div class="teacher-avatar"><img src="assets/teachers/samudro-prem.jpg" alt="СамудроПрем" loading="eager" /></div><div class="teacher-meta"><span class="teacher-country">Англия</span><span class="pill">chakra / power</span></div><b>СамудроПрем</b><p class="micro">чакры, внутренняя сила, трансформация и интеграция</p></article>
-              <article class="teacher"><div class="teacher-avatar"><img src="assets/teachers/satyarti.jpg" alt="Сатьярти Пратик" loading="eager" /></div><div class="teacher-meta"><span class="teacher-country">Индия</span><span class="pill">bodywork</span></div><b>Сатьярти Пратик</b><p class="micro">тантра, кашмирский массаж, работа с телом</p></article>
-              <article class="teacher"><div class="teacher-avatar"><img src="assets/teachers/seva-prem.jpg" alt="Сева Прем" loading="eager" /></div><div class="teacher-meta"><span class="teacher-country">Россия</span><span class="pill">sensitivity</span></div><b>Сева Прем</b><p class="micro">практики тонкой чувствительности и присутствия</p></article>
-              <article class="teacher"><div class="teacher-avatar"><img src="assets/teachers/yury-chikhalov.jpg" alt="Юрий Чихалов" loading="eager" /></div><div class="teacher-meta"><span class="teacher-country">Россия</span><span class="pill">host</span></div><b>Юрий Чихалов</b><p class="micro">организация пространства, подбор формата и сопровождение</p></article>
+              <article class="teacher"><div class="teacher-avatar"><img src="assets/teachers/homa-mukto.jpg" width="512" height="512" alt="Хома и Мукто" loading="lazy" decoding="async" /></div><div class="teacher-meta"><span class="teacher-country">Бразилия</span><span class="pill">tantra therapy</span></div><b>Хома и Мукто</b><p class="micro">международные тантра-терапевты, ретриты и глубокие тренинги</p></article>
+              <article class="teacher"><div class="teacher-avatar"><img src="assets/teachers/georgy-golobokov.jpg" width="512" height="512" alt="Георгий Голобоков" loading="lazy" decoding="async" /></div><div class="teacher-meta"><span class="teacher-country">Россия</span><span class="pill">group work</span></div><b>Георгий Голобоков</b><p class="micro">тантрические кемпы, контакт, групповое поле</p></article>
+              <article class="teacher"><div class="teacher-avatar"><img src="assets/teachers/samudro-prem.jpg" width="512" height="512" alt="СамудроПрем" loading="lazy" decoding="async" /></div><div class="teacher-meta"><span class="teacher-country">Англия</span><span class="pill">chakra / power</span></div><b>СамудроПрем</b><p class="micro">чакры, внутренняя сила, трансформация и интеграция</p></article>
+              <article class="teacher"><div class="teacher-avatar"><img src="assets/teachers/satyarti.jpg" width="512" height="512" alt="Сатьярти Пратик" loading="lazy" decoding="async" /></div><div class="teacher-meta"><span class="teacher-country">Индия</span><span class="pill">bodywork</span></div><b>Сатьярти Пратик</b><p class="micro">тантра, кашмирский массаж, работа с телом</p></article>
+              <article class="teacher"><div class="teacher-avatar"><img src="assets/teachers/seva-prem.jpg" width="512" height="512" alt="Сева Прем" loading="lazy" decoding="async" /></div><div class="teacher-meta"><span class="teacher-country">Россия</span><span class="pill">sensitivity</span></div><b>Сева Прем</b><p class="micro">практики тонкой чувствительности и присутствия</p></article>
+              <article class="teacher"><div class="teacher-avatar"><img src="assets/teachers/yury-chikhalov.jpg" width="512" height="512" alt="Юрий Чихалов" loading="lazy" decoding="async" /></div><div class="teacher-meta"><span class="teacher-country">Россия</span><span class="pill">host</span></div><b>Юрий Чихалов</b><p class="micro">организация пространства, подбор формата и сопровождение</p></article>
             </div>
             <div class="teacher-set" aria-hidden="true">
-              <article class="teacher"><div class="teacher-avatar"><img src="assets/teachers/homa-mukto.jpg" alt="" loading="eager" /></div><div class="teacher-meta"><span class="teacher-country">Бразилия</span><span class="pill">tantra therapy</span></div><b>Хома и Мукто</b><p class="micro">международные тантра-терапевты, ретриты и глубокие тренинги</p></article>
-              <article class="teacher"><div class="teacher-avatar"><img src="assets/teachers/georgy-golobokov.jpg" alt="" loading="eager" /></div><div class="teacher-meta"><span class="teacher-country">Россия</span><span class="pill">group work</span></div><b>Георгий Голобоков</b><p class="micro">тантрические кемпы, контакт, групповое поле</p></article>
-              <article class="teacher"><div class="teacher-avatar"><img src="assets/teachers/samudro-prem.jpg" alt="" loading="eager" /></div><div class="teacher-meta"><span class="teacher-country">Англия</span><span class="pill">chakra / power</span></div><b>СамудроПрем</b><p class="micro">чакры, внутренняя сила, трансформация и интеграция</p></article>
-              <article class="teacher"><div class="teacher-avatar"><img src="assets/teachers/satyarti.jpg" alt="" loading="eager" /></div><div class="teacher-meta"><span class="teacher-country">Индия</span><span class="pill">bodywork</span></div><b>Сатьярти Пратик</b><p class="micro">тантра, кашмирский массаж, работа с телом</p></article>
-              <article class="teacher"><div class="teacher-avatar"><img src="assets/teachers/seva-prem.jpg" alt="" loading="eager" /></div><div class="teacher-meta"><span class="teacher-country">Россия</span><span class="pill">sensitivity</span></div><b>Сева Прем</b><p class="micro">практики тонкой чувствительности и присутствия</p></article>
-              <article class="teacher"><div class="teacher-avatar"><img src="assets/teachers/yury-chikhalov.jpg" alt="" loading="eager" /></div><div class="teacher-meta"><span class="teacher-country">Россия</span><span class="pill">host</span></div><b>Юрий Чихалов</b><p class="micro">организация пространства, подбор формата и сопровождение</p></article>
+              <article class="teacher"><div class="teacher-avatar"><img src="assets/teachers/homa-mukto.jpg" width="512" height="512" alt="" loading="lazy" decoding="async" /></div><div class="teacher-meta"><span class="teacher-country">Бразилия</span><span class="pill">tantra therapy</span></div><b>Хома и Мукто</b><p class="micro">международные тантра-терапевты, ретриты и глубокие тренинги</p></article>
+              <article class="teacher"><div class="teacher-avatar"><img src="assets/teachers/georgy-golobokov.jpg" width="512" height="512" alt="" loading="lazy" decoding="async" /></div><div class="teacher-meta"><span class="teacher-country">Россия</span><span class="pill">group work</span></div><b>Георгий Голобоков</b><p class="micro">тантрические кемпы, контакт, групповое поле</p></article>
+              <article class="teacher"><div class="teacher-avatar"><img src="assets/teachers/samudro-prem.jpg" width="512" height="512" alt="" loading="lazy" decoding="async" /></div><div class="teacher-meta"><span class="teacher-country">Англия</span><span class="pill">chakra / power</span></div><b>СамудроПрем</b><p class="micro">чакры, внутренняя сила, трансформация и интеграция</p></article>
+              <article class="teacher"><div class="teacher-avatar"><img src="assets/teachers/satyarti.jpg" width="512" height="512" alt="" loading="lazy" decoding="async" /></div><div class="teacher-meta"><span class="teacher-country">Индия</span><span class="pill">bodywork</span></div><b>Сатьярти Пратик</b><p class="micro">тантра, кашмирский массаж, работа с телом</p></article>
+              <article class="teacher"><div class="teacher-avatar"><img src="assets/teachers/seva-prem.jpg" width="512" height="512" alt="" loading="lazy" decoding="async" /></div><div class="teacher-meta"><span class="teacher-country">Россия</span><span class="pill">sensitivity</span></div><b>Сева Прем</b><p class="micro">практики тонкой чувствительности и присутствия</p></article>
+              <article class="teacher"><div class="teacher-avatar"><img src="assets/teachers/yury-chikhalov.jpg" width="512" height="512" alt="" loading="lazy" decoding="async" /></div><div class="teacher-meta"><span class="teacher-country">Россия</span><span class="pill">host</span></div><b>Юрий Чихалов</b><p class="micro">организация пространства, подбор формата и сопровождение</p></article>
             </div>
           </div>
         </div>
@@ -1115,7 +1222,7 @@
           </article>
           <article class="resource">
             <div><h3>Подбор формата</h3><p>Если человек не понимает, что ему подходит, лучше вести его в диалог, а не бросать в список страниц.</p></div>
-            <a class="btn light" href="https://t.me/chikhalov" target="_blank" rel="noreferrer">Написать</a>
+            <a class="btn light" href="https://t.me/chikhalov" target="_blank" rel="noopener noreferrer">Написать</a>
           </article>
           <article class="resource">
             <div><h3>Материалы</h3><p>Практики, посты, записи и рекомендации, которые можно использовать между ретритами.</p></div>
@@ -1130,7 +1237,7 @@
         <h2>Выбрать путь проще, когда есть живой контакт</h2>
         <p class="lead">Напиши, если хочешь понять, какой формат Human сейчас подходит именно тебе.</p>
         <div class="btn-row" style="justify-content:center">
-          <a class="btn color" href="https://t.me/chikhalov" target="_blank" rel="noreferrer">Подобрать формат</a>
+          <a class="btn color" href="https://t.me/chikhalov" target="_blank" rel="noopener noreferrer">Подобрать формат</a>
           <a class="btn" href="#programs">Смотреть программы</a>
         </div>
       </div>

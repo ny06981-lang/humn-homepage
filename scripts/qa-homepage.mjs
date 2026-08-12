@@ -1,3 +1,4 @@
+import { existsSync } from "node:fs";
 import path from "node:path";
 
 const playwrightPath =
@@ -68,10 +69,14 @@ for (const viewport of viewports) {
       hasSamudroAnnouncement: document.body.innerText.includes("Чакра · Тантра · Дао"),
       hasHumanLogo: [...document.querySelectorAll(".site-logo")].some((el) => el.textContent.trim() === "Human"),
       horizontalOverflow: document.documentElement.scrollWidth - window.innerWidth,
-      imagesMissing: [...document.images].filter((img) => img.naturalWidth === 0).map((img) => img.getAttribute("src")),
+      imageSources: [...document.images].map((img) => img.getAttribute("src")).filter(Boolean),
       overlaps: overlaps.slice(0, 12),
     };
   });
+
+  metrics.imagesMissing = metrics.imageSources
+    .filter((src) => src.startsWith("assets/"))
+    .filter((src) => !existsSync(path.join(root, src)));
 
   results.push({ viewport: viewport.name, ...metrics, consoleIssues });
   await page.close();
