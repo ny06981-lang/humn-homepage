@@ -6,6 +6,7 @@ const inputPath = path.join(root, "index.html");
 const distPath = path.join(root, "dist");
 const outputPath = path.join(distPath, "tilda-homepage-t123.html");
 const githubBase = "https://ny06981-lang.github.io/humn-homepage/";
+const tildaRecordId = "rec2931163101";
 
 const html = await readFile(inputPath, "utf8");
 const style = html.match(/<style>([\s\S]*?)<\/style>/)?.[1] ?? "";
@@ -27,10 +28,24 @@ const embeddedBody = rewriteAssets(body);
 
 const tildaHtml = `<style>
 /* Human homepage injected via Tilda T123. */
+body .t-rec,
+body .r { display: none !important; }
+body #${tildaRecordId},
+body #record${tildaRecordId.replace("rec", "")},
+body #${tildaRecordId}.t-rec,
+body #${tildaRecordId}.r {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
 .t-rec:not(:has(.human-homepage-root)),
 .r:not(:has(.human-homepage-root)) { display: none !important; }
 .human-homepage-root,
-.human-homepage-root * { box-sizing: border-box; }
+.human-homepage-root,
+.human-homepage-root * {
+  box-sizing: border-box;
+  visibility: visible !important;
+}
 html { scroll-behavior: smooth; }
 ${embeddedStyle}
 </style>
@@ -47,6 +62,10 @@ ${embeddedBody}
     document.querySelectorAll('.t-rec, .r').forEach(function (record) {
       if (record !== hostRecord && !record.contains(root)) {
         record.style.setProperty('display', 'none', 'important');
+        record.style.setProperty('visibility', 'hidden', 'important');
+      } else {
+        record.style.setProperty('display', 'block', 'important');
+        record.style.setProperty('visibility', 'visible', 'important');
       }
     });
   }
