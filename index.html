@@ -334,11 +334,14 @@
       z-index: 2;
       min-height: calc(100vh - 170px);
       display: grid;
+      grid-template-columns: minmax(0, 1fr);
       grid-template-rows: 1fr auto;
       gap: 42px;
     }
     .hero-copy {
       align-self: end;
+      min-width: 0;
+      width: 100%;
       display: grid;
       grid-template-columns: 1fr 360px;
       gap: 44px;
@@ -375,6 +378,8 @@
       to { opacity: .92; transform: scale(1.04) rotate(4deg); }
     }
     .hero-metrics {
+      min-width: 0;
+      width: 100%;
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       border: 1px solid var(--line);
