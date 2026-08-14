@@ -1058,8 +1058,8 @@
         <div class="retreats-preview-head">
           <div>
             <p class="eyebrow">Ближайшие ретриты</p>
-            <h2>Две ближайшие точки входа HUMN</h2>
-            <p class="lead">Листалка помогает сразу увидеть, что открыто сейчас: ближайший ретрит с СамудроПрем в Чиралы и декабрьскую программу с Хомой и Муктой на Бали.</p>
+            <h2>Два ближайших ретрита HUMN</h2>
+            <p class="lead">Выберите своё следующее путешествие: ретрит с СамудроПремом в Чиралы или декабрьская программа с Хомой и Мукто на Бали.</p>
           </div>
           <div class="upcoming-controls" aria-label="Навигация по ближайшим ретритам">
             <button class="upcoming-arrow upcoming-prev" type="button" aria-label="Предыдущий ретрит">←</button>
@@ -1204,4 +1204,3 @@
 <script>(()=>{const rail=document.querySelector('.upcoming-rail'),cards=[...document.querySelectorAll('.retreat-card')],counter=document.querySelector('.upcoming-counter b');if(!rail||!cards.length)return;let active=0;const set=n=>{active=(n+cards.length)%cards.length;cards[active].scrollIntoView({behavior:'smooth',inline:'start',block:'nearest'});if(counter)counter.textContent=String(active+1).padStart(2,'0')};document.querySelector('.upcoming-prev')?.addEventListener('click',()=>set(active-1));document.querySelector('.upcoming-next')?.addEventListener('click',()=>set(active+1));rail.addEventListener('scroll',()=>{const left=rail.scrollLeft;let best=0,dist=Infinity;cards.forEach((card,i)=>{const d=Math.abs(card.offsetLeft-left);if(d<dist){dist=d;best=i}});active=best;if(counter)counter.textContent=String(active+1).padStart(2,'0')},{passive:true});})();</script>
 
 <script>(()=>{const t=document.querySelector('.archive-track'),s=[...document.querySelectorAll('.archive-slide')],d=[...document.querySelectorAll('.archive-dot')],c=document.querySelector('.archive-counter b');if(!t)return;let i=0,x=0;const go=n=>{i=(n+s.length)%s.length;t.style.transform='translateX(-'+i*100+'%)';s.forEach((e,k)=>e.setAttribute('aria-hidden',k!==i));d.forEach((e,k)=>e.classList.toggle('active',k===i));c.textContent=String(i+1).padStart(2,'0')};document.querySelector('.archive-prev').onclick=()=>go(i-1);document.querySelector('.archive-next').onclick=()=>go(i+1);d.forEach((e,k)=>e.onclick=()=>go(k));t.onpointerdown=e=>x=e.clientX;t.onpointerup=e=>{if(Math.abs(e.clientX-x)>50)go(i+(e.clientX<x?1:-1))}})();</script></body></html>
-
