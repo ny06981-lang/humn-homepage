@@ -4,6 +4,7 @@ Static GitHub Pages build for the Human homepage concept.
 
 - Brand/site: https://humns.ru/
 - Retreat page: https://ny06981-lang.github.io/humn-chakra-tantra-dao/
+- Upcoming retreats preview: https://ny06981-lang.github.io/humn-homepage/previews/upcoming-retreats.html
 
 ## Publishing
 
