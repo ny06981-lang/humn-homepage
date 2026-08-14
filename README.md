@@ -12,6 +12,10 @@ Use `docs/publishing-workflow.md` as the release checklist. Every update should
 go to GitHub first, then be tested, then published to Tilda only after explicit
 approval.
 
+Use `docs/landing-rules.md` before designing or editing Human landing pages. It
+captures the brand, UX/UI, copy, QA, GitHub preview, and Tilda publishing rules
+learned during this project.
+
 Build the Tilda T123 embed:
 
 ```sh
