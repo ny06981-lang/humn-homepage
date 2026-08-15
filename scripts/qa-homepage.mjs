@@ -8,6 +8,7 @@ const { chromium } = await import(playwrightPath);
 const root = path.resolve(new URL("..", import.meta.url).pathname);
 const pageUrl = `file://${path.join(root, "index.html")}`;
 const viewports = [
+  { name: "narrow-mobile", width: 360, height: 900 },
   { name: "mobile", width: 390, height: 1100 },
   { name: "desktop", width: 1440, height: 1200 },
 ];
@@ -64,8 +65,27 @@ for (const viewport of viewports) {
       }
     }
 
+    const meta = (selector) => document.querySelector(selector)?.getAttribute("content")?.trim() || "";
+    const jsonLd = [...document.querySelectorAll('script[type="application/ld+json"]')]
+      .flatMap((script) => {
+        try {
+          const parsed = JSON.parse(script.textContent || "{}");
+          return Array.isArray(parsed["@graph"]) ? parsed["@graph"] : [parsed];
+        } catch {
+          return [];
+        }
+      });
+    const eventNames = jsonLd.filter((item) => item["@type"] === "Event").map((item) => item.name);
+
     return {
       title: document.title,
+      description: meta('meta[name="description"]'),
+      canonical: document.querySelector('link[rel="canonical"]')?.getAttribute("href") || "",
+      ogTitle: meta('meta[property="og:title"]'),
+      ogDescription: meta('meta[property="og:description"]'),
+      ogImage: meta('meta[property="og:image"]'),
+      twitterCard: meta('meta[name="twitter:card"]'),
+      eventNames,
       hasSamudroAnnouncement: document.body.innerText.includes("Чакра · Тантра · Дао"),
       hasHomaAnnouncement: document.body.innerText.includes("Тантра с Хомой и Муктой"),
       hasBrandLogo: [...document.querySelectorAll(".site-logo")].some((el) => ["Human", "HUMN"].includes(el.textContent.trim())),
@@ -87,25 +107,28 @@ for (const viewport of viewports) {
 
   const interactionIssues = await page.evaluate(async () => {
     const issues = [];
-    const clickAndWait = async (selector, label) => {
+    const clickAndExpectCounter = async (selector, label, counterSelector) => {
       const button = document.querySelector(selector);
+      const counter = document.querySelector(counterSelector);
       if (!button) {
         issues.push(`${label}: missing`);
         return;
       }
-      const before = document.body.innerText;
+      if (!counter) {
+        issues.push(`${label}: missing counter`);
+        return;
+      }
+      const before = counter.textContent.trim();
       button.click();
       await new Promise((resolve) => setTimeout(resolve, 320));
-      const after = document.body.innerText;
-      if (before === after && selector.includes("archive")) {
-        issues.push(`${label}: click did not update visible state`);
-      }
+      const after = counter.textContent.trim();
+      if (before === after) issues.push(`${label}: counter did not update`);
     };
 
-    await clickAndWait(".upcoming-next", "upcoming next");
-    await clickAndWait(".upcoming-prev", "upcoming prev");
-    await clickAndWait(".archive-next", "archive next");
-    await clickAndWait(".archive-prev", "archive prev");
+    await clickAndExpectCounter(".upcoming-next", "upcoming next", ".upcoming-counter b");
+    await clickAndExpectCounter(".upcoming-prev", "upcoming prev", ".upcoming-counter b");
+    await clickAndExpectCounter(".archive-next", "archive next", ".archive-counter b");
+    await clickAndExpectCounter(".archive-prev", "archive prev", ".archive-counter b");
 
     return issues;
   });
@@ -124,6 +147,23 @@ await browser.close();
 
 const failures = results.flatMap((result) => {
   const items = [];
+  if (!result.title.includes("HUMN")) items.push(`${result.viewport}: title snippet missing HUMN`);
+  if (result.title.length > 62) items.push(`${result.viewport}: title snippet too long (${result.title.length})`);
+  if (!result.description.includes("СамудроПрем") || !result.description.includes("Бали")) {
+    items.push(`${result.viewport}: meta description does not mention current retreats`);
+  }
+  if (result.description.length < 110 || result.description.length > 170) {
+    items.push(`${result.viewport}: meta description length ${result.description.length}`);
+  }
+  if (result.canonical !== "https://humns.ru/") items.push(`${result.viewport}: canonical is ${result.canonical}`);
+  if (result.ogTitle !== result.title) items.push(`${result.viewport}: og:title differs from title`);
+  if (!result.ogDescription.includes("СамудроПрем") || !result.ogDescription.includes("Бали")) {
+    items.push(`${result.viewport}: og:description does not mention current retreats`);
+  }
+  if (!result.ogImage.startsWith("https://")) items.push(`${result.viewport}: og:image is not absolute https`);
+  if (result.twitterCard !== "summary_large_image") items.push(`${result.viewport}: twitter card is ${result.twitterCard}`);
+  if (!result.eventNames.some((name) => name.includes("СамудроПрем"))) items.push(`${result.viewport}: Samudro Event JSON-LD missing`);
+  if (!result.eventNames.some((name) => name.includes("Хомой"))) items.push(`${result.viewport}: Homa/Mukto Event JSON-LD missing`);
   if (!result.hasSamudroAnnouncement) items.push(`${result.viewport}: Samudro announcement missing`);
   if (!result.hasHomaAnnouncement) items.push(`${result.viewport}: Homa/Mukto announcement missing`);
   if (!result.hasBrandLogo) items.push(`${result.viewport}: brand logo missing`);
