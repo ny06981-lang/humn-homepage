@@ -6,7 +6,6 @@ const inputPath = path.join(root, "index.html");
 const distPath = path.join(root, "dist");
 const outputPath = path.join(distPath, "tilda-homepage-t123.html");
 const githubBase = "https://ny06981-lang.github.io/humn-homepage/";
-const tildaRecordId = "rec2931163101";
 
 const html = await readFile(inputPath, "utf8");
 const style = html.match(/<style>([\s\S]*?)<\/style>/)?.[1] ?? "";
@@ -28,18 +27,17 @@ const embeddedBody = rewriteAssets(body);
 
 const tildaHtml = `<style>
 /* Human homepage injected via Tilda T123. */
-body .t-rec,
-body .r { display: none !important; }
-body #${tildaRecordId},
-body #record${tildaRecordId.replace("rec", "")},
-body #${tildaRecordId}.t-rec,
-body #${tildaRecordId}.r {
+body .t-rec:not(:has(.human-homepage-root)),
+body .r:not(:has(.human-homepage-root)) {
+  display: none !important;
+  visibility: hidden !important;
+}
+body .t-rec:has(.human-homepage-root),
+body .r:has(.human-homepage-root) {
   display: block !important;
   opacity: 1 !important;
   visibility: visible !important;
 }
-.t-rec:not(:has(.human-homepage-root)),
-.r:not(:has(.human-homepage-root)) { display: none !important; }
 .human-homepage-root,
 .human-homepage-root,
 .human-homepage-root * {
