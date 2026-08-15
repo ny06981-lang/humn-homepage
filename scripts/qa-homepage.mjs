@@ -67,12 +67,50 @@ for (const viewport of viewports) {
     return {
       title: document.title,
       hasSamudroAnnouncement: document.body.innerText.includes("Чакра · Тантра · Дао"),
-      hasHumanLogo: [...document.querySelectorAll(".site-logo")].some((el) => el.textContent.trim() === "Human"),
+      hasHomaAnnouncement: document.body.innerText.includes("Тантра с Хомой и Муктой"),
+      hasBrandLogo: [...document.querySelectorAll(".site-logo")].some((el) => ["Human", "HUMN"].includes(el.textContent.trim())),
       horizontalOverflow: document.documentElement.scrollWidth - window.innerWidth,
       imageSources: [...document.images].map((img) => img.getAttribute("src")).filter(Boolean),
+      linkIssues: [...document.querySelectorAll("a")].flatMap((link) => {
+        const text = link.textContent.trim() || link.getAttribute("aria-label") || "link";
+        const href = link.getAttribute("href");
+        if (!href) return [`${text}: missing href`];
+        if (href.startsWith("#") && href.length > 1 && !document.querySelector(href)) {
+          return [`${text}: missing anchor target ${href}`];
+        }
+        return [];
+      }),
+      visibleButtonCount: [...document.querySelectorAll("a.btn, button")].filter(isVisible).length,
       overlaps: overlaps.slice(0, 12),
     };
   });
+
+  const interactionIssues = await page.evaluate(async () => {
+    const issues = [];
+    const clickAndWait = async (selector, label) => {
+      const button = document.querySelector(selector);
+      if (!button) {
+        issues.push(`${label}: missing`);
+        return;
+      }
+      const before = document.body.innerText;
+      button.click();
+      await new Promise((resolve) => setTimeout(resolve, 320));
+      const after = document.body.innerText;
+      if (before === after && selector.includes("archive")) {
+        issues.push(`${label}: click did not update visible state`);
+      }
+    };
+
+    await clickAndWait(".upcoming-next", "upcoming next");
+    await clickAndWait(".upcoming-prev", "upcoming prev");
+    await clickAndWait(".archive-next", "archive next");
+    await clickAndWait(".archive-prev", "archive prev");
+
+    return issues;
+  });
+
+  metrics.interactionIssues = interactionIssues;
 
   metrics.imagesMissing = metrics.imageSources
     .filter((src) => src.startsWith("assets/"))
@@ -87,9 +125,13 @@ await browser.close();
 const failures = results.flatMap((result) => {
   const items = [];
   if (!result.hasSamudroAnnouncement) items.push(`${result.viewport}: Samudro announcement missing`);
-  if (!result.hasHumanLogo) items.push(`${result.viewport}: Human logo missing`);
+  if (!result.hasHomaAnnouncement) items.push(`${result.viewport}: Homa/Mukto announcement missing`);
+  if (!result.hasBrandLogo) items.push(`${result.viewport}: brand logo missing`);
   if (result.horizontalOverflow > 2) items.push(`${result.viewport}: horizontal overflow ${result.horizontalOverflow}px`);
   if (result.imagesMissing.length) items.push(`${result.viewport}: missing images ${result.imagesMissing.join(", ")}`);
+  if (result.linkIssues.length) items.push(`${result.viewport}: link issues ${result.linkIssues.join(" | ")}`);
+  if (result.visibleButtonCount < 6) items.push(`${result.viewport}: too few visible controls/buttons (${result.visibleButtonCount})`);
+  if (result.interactionIssues.length) items.push(`${result.viewport}: interaction issues ${result.interactionIssues.join(" | ")}`);
   if (result.consoleIssues.length) items.push(`${result.viewport}: console issues ${result.consoleIssues.join(" | ")}`);
   if (result.overlaps.length) items.push(`${result.viewport}: text overlaps ${JSON.stringify(result.overlaps)}`);
   return items;
