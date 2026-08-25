@@ -6,6 +6,7 @@ const inputPath = path.join(root, "index.html");
 const distPath = path.join(root, "dist");
 const outputPath = path.join(distPath, "tilda-homepage-t123.html");
 const githubBase = "https://ny06981-lang.github.io/humn-homepage/";
+const activeTildaRecordId = process.env.TILDA_RECORD_ID || "2931163101";
 
 const html = await readFile(inputPath, "utf8");
 const style = html.match(/<style>([\s\S]*?)<\/style>/)?.[1] ?? "";
@@ -27,13 +28,15 @@ const embeddedBody = rewriteAssets(body);
 
 const tildaHtml = `<style>
 /* Human homepage injected via Tilda T123. */
-body .t-rec:not(:has(.human-homepage-root)),
-body .r:not(:has(.human-homepage-root)) {
+body .t-rec,
+body .r {
   display: none !important;
   visibility: hidden !important;
 }
-body .t-rec:has(.human-homepage-root),
-body .r:has(.human-homepage-root) {
+body #rec${activeTildaRecordId},
+body #record${activeTildaRecordId},
+body #rec${activeTildaRecordId}.t-rec,
+body #rec${activeTildaRecordId}.r {
   display: block !important;
   opacity: 1 !important;
   visibility: visible !important;
@@ -55,10 +58,10 @@ ${embeddedBody}
   function activateHumanHomepage() {
     var root = document.querySelector('.human-homepage-root');
     if (!root) return;
-    var hostRecord = root.closest('.t-rec, .r');
+    var hostRecord = document.getElementById('rec${activeTildaRecordId}') || root.closest('.t-rec, .r');
     if (hostRecord) hostRecord.classList.add('human-homepage-record');
     document.querySelectorAll('.t-rec, .r').forEach(function (record) {
-      if (record !== hostRecord && !record.contains(root)) {
+      if (record !== hostRecord) {
         record.style.setProperty('display', 'none', 'important');
         record.style.setProperty('visibility', 'hidden', 'important');
       } else {
