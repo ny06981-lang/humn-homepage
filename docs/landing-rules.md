@@ -160,6 +160,9 @@ merge them.
 
 - Tilda may keep old records in the page source. The active Human T123 block must
   robustly hide legacy records.
+- For the homepage, the active Tilda T123 record is `2931163101`. The generated
+  embed must be scoped to this record and hide every other `.t-rec`/`.r`,
+  including old Human/Tantra roots.
 - Avoid generic CSS class names that can collide with Tilda or injected styles.
   Use `human-` prefixed names, for example `human-container`, not `.container`.
 - Keep the active Human root class stable: `.human-homepage-root`.

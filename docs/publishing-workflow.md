@@ -16,11 +16,17 @@ This repository is the source of truth for the Human homepage.
 - Current Tilda project: `12741697`
 - Homepage editor URL: `https://tilda.ru/page/?pageid=66936657&projectid=12741697`
 - Homepage public URL: `https://humns.ru/`
+- Active homepage T123 record: `2931163101`
 - Retreat GitHub preview: `https://ny06981-lang.github.io/humn-chakra-tantra-dao/`
 
 Before overwriting a Tilda page, check whether manual changes were made in Tilda
 after the last GitHub publish. If there are manual edits, merge those changes
 back into this repository first or confirm with Yury that overwriting them is ok.
+
+The homepage has legacy Tilda/T123 records. Publish only the generated
+`dist/tilda-homepage-t123.html` into active record `2931163101`. The generated
+embed is intentionally record-scoped so old Human/Tantra records cannot become
+visible again after a publish.
 
 ## QA checklist
 
