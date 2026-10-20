@@ -39,7 +39,7 @@ replaceOnce(
 );
 replaceOnce(
   '<li data-list="bullet"><strong>Прожить секс как медитацию</strong>&nbsp;– быть в моменте, осознанно, без погони за оргазмом.</li>',
-  '<li data-list="bullet">Исследовать медитацию как практику осознанного присутствия, глубокого расслабления и более тонкого восприятия себя.</li>'
+  '<li data-list="bullet"><strong>Исследовать медитацию</strong> как практику осознанного присутствия, глубокого расслабления и более тонкого восприятия себя.</li>'
 );
 replaceOnce(
   '<li data-list="bullet"><strong>Исцелить старые раны</strong>&nbsp;– встретить свои страхи, прожить боль и отпустить её.</li>',
@@ -85,6 +85,11 @@ replaceOnce(
   '<li data-list="bullet">нет обязательной наготы или сексуального контакта </li>',
   '<li data-list="bullet">границы участия и формат телесных упражнений можно обсудить с организатором заранее.</li>'
 );
+
+const homeLinks = html.split('href="/"').length - 1;
+if (homeLinks !== 2) throw new Error(`Expected two homepage links, found ${homeLinks}`);
+html = html.replaceAll('href="/"', 'href="https://humns.ru/"');
+replaceOnce("I'm available for business trips to other cities for projects lasting a month or longer.", '');
 
 // The preview is a published Tilda snapshot. Keep its layout and public assets,
 // but don't let preview traffic register as production analytics.
