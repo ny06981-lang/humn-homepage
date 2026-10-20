@@ -14,7 +14,7 @@ for (const phrase of [
   'Практика осознанного присутствия помогает лучше распознавать свои чувства, привычные реакции и способы взаимодействия с людьми.',
   'ЧАСТЬ 1. ПРОБУЖДЕНИЕ ЖИЗНЕННОЙ ЭНЕРГИИ',
   'ЧАСТЬ 2. ПРИСУТСТВИЕ И ОБЩЕНИЕ',
-  'Хома и Мукто — преподаватели тантры',
+  'Хома и Мукто более 30 лет ведут тренинги и ретриты по личностному развитию',
   'name="robots" content="noindex,nofollow,noarchive,nosnippet"',
 ]) assert.ok((phrase.startsWith('name=') ? preview : visibleText).includes(phrase), `Missing approved copy: ${phrase.slice(0, 80)}`);
 
@@ -29,6 +29,7 @@ for (const phrase of [
 ]) assert.ok(!preview.includes(phrase), `Old copy remains: ${phrase}`);
 
 assert.ok(!/близост|интимн|сексуал|секс|оргазм|intimacy/i.test(preview), 'Sensitive framing remains in preview');
+assert.ok(!/тантр/i.test(preview.replace(/<script[\s\S]*?<\/script>/g, '')), 'Old terminology remains outside scripts');
 assert.ok(!preview.includes('id="rec2369890571"'), 'Unapproved review carousel remains');
 
 for (const phrase of [
