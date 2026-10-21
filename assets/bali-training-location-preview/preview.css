@@ -1,0 +1,20 @@
+@media (max-width: 640px) {
+  .t450__menu__content {
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 73px !important;
+    background: #fff !important;
+    border-bottom: 1px solid #eee9e9;
+  }
+
+  .t450__burger_container {
+    position: absolute !important;
+    top: 7px !important;
+    right: 15px !important;
+  }
+
+  #rec4997496501 .tn-elem__49974965011470210224069 {
+    display: none !important;
+  }
+}
